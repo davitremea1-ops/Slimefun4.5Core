@@ -25,16 +25,16 @@ import javax.annotation.Nullable;
  */
 public class InventoryViewWrapper extends InventoryViewMock {
 
-    private final MenuType menuType;
+    private final InventoryView backingView;
 
     private InventoryViewWrapper(HumanEntity player,
                                  String name,
                                  Inventory top,
                                  Inventory bottom,
                                  InventoryType type,
-                                 @Nullable MenuType menuType) {
+                                 @Nonnull InventoryView backingView) {
         super(player, name, top, bottom, type);
-        this.menuType = menuType;
+        this.backingView = backingView;
     }
 
     @Nonnull
@@ -44,14 +44,23 @@ public class InventoryViewWrapper extends InventoryViewMock {
         Inventory top = inventoryView.getTopInventory();
         Inventory bottom = inventoryView.getBottomInventory();
         InventoryType inventoryType = inventoryView.getType();
-        MenuType menuType = inventoryView.getMenuType();
-        return new InventoryViewWrapper(player, name, top, bottom, inventoryType, menuType);
+        return new InventoryViewWrapper(player, name, top, bottom, inventoryType, inventoryView);
     }
 
     @Override
     @Nullable
     public MenuType getMenuType() {
-        return menuType;
+        return backingView.getMenuType();
+    }
+
+    @Override
+    public void open() {
+        backingView.open();
+    }
+
+    @Override
+    public void close() {
+        backingView.close();
     }
 
     @Override
