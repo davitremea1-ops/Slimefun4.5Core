@@ -40,6 +40,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.bridge.SF4Patterns;
 import io.github.bakedlibs.dough.items.ItemMetaSnapshot;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.exceptions.PrematureCodeException;
+import io.github.thebusybiscuit.slimefun4.api.exceptions.WrongItemStackException;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -57,6 +58,7 @@ public class SlimefunItemStack extends ItemStack {
 
     private String id;
     private ItemMetaSnapshot itemMetaSnapshot;
+    private boolean locked = false;
 
     private String texture = null;
 
@@ -250,18 +252,38 @@ public class SlimefunItemStack extends ItemStack {
         return itemMetaSnapshot;
     }
 
+    @Override
     public boolean setItemMeta(ItemMeta meta) {
+        validate();
         itemMetaSnapshot = new ItemMetaSnapshot(meta);
 
         return super.setItemMeta(meta);
     }
 
+    @Override
     public void setType(Material type) {
+        validate();
         super.setType(type);
     }
 
+    @Override
     public void setAmount(int amount) {
+        validate();
         super.setAmount(amount);
+    }
+
+    /**
+     * Prevents mutation of this item stack's type, amount and metadata.
+     * This is used by Slimefun when an item's original template is registered.
+     */
+    public void lock() {
+        locked = true;
+    }
+
+    private void validate() {
+        if (locked) {
+            throw new WrongItemStackException(id + " is not mutable.");
+        }
     }
 
     public @Nonnull Optional<String> getSkullTexture() {
