@@ -25,16 +25,16 @@
         <!-- Compatibility: jar names use compact rolling build numbers such as 2601, 2699, 2700. -->
         <short.build.number>2600</short.build.number>
 
-        <!-- Gera bytecode compatível com Java 17. -->
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <!-- Os testes também são compilados para Java 17. -->
-        <maven.compiler.testSource>17</maven.compiler.testSource>
-        <maven.compiler.testTarget>17</maven.compiler.testTarget>
+        <!-- O servidor-alvo e sua API usam Java 21. -->
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <!-- Os testes também são compilados para Java 21. -->
+        <maven.compiler.testSource>21</maven.compiler.testSource>
+        <maven.compiler.testTarget>21</maven.compiler.testTarget>
 
         <!-- Propriedades da API Paper -->
-        <paper.version>1.19.4</paper.version>
-        <paper.javadocs>https://jd.papermc.io/paper/1.19.4/</paper.javadocs>
+        <paper.version>1.21.11</paper.version>
+        <paper.javadocs>https://jd.papermc.io/paper/1.21.11/</paper.javadocs>
 
         <!-- Default settings for sonarcloud.io -->
         <sonar.projectKey>Slimefun_Slimefun4</sonar.projectKey>
@@ -449,8 +449,8 @@
         <!-- This needs to be before Spigot because MockBukkit will fail otherwise. -->
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.19</artifactId>
-            <version>3.0.0</version>
+            <artifactId>MockBukkit-v1.21</artifactId>
+            <version>3.133.2</version>
             <scope>test</scope>
 
             <exclusions>
