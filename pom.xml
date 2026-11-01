@@ -162,6 +162,33 @@
             </plugin>
 
             <plugin>
+                <!-- Atualiza os testes para o namespace e contratos do MockBukkit 4.x. -->
+                <groupId>org.openrewrite.maven</groupId>
+                <artifactId>rewrite-maven-plugin</artifactId>
+                <version>5.42.2</version>
+                <configuration>
+                    <activeRecipes>
+                        <recipe>org.mockbukkit.rewrite.PackageRename</recipe>
+                        <recipe>org.mockbukkit.rewrite.ClassRename</recipe>
+                    </activeRecipes>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.mockbukkit.rewrite</groupId>
+                        <artifactId>openrewrite-recipes</artifactId>
+                        <version>1.0.2</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <id>migrate-mockbukkit-tests</id>
+                        <phase>process-sources</phase>
+                        <goals><goal>run</goal></goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <!-- Sonarcloud Scanner -->
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
@@ -448,9 +475,9 @@
         </dependency>
         <!-- This needs to be before Spigot because MockBukkit will fail otherwise. -->
         <dependency>
-            <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.21</artifactId>
-            <version>3.133.2</version>
+            <groupId>org.mockbukkit.mockbukkit</groupId>
+            <artifactId>mockbukkit-v1.21</artifactId>
+            <version>4.116.3</version>
             <scope>test</scope>
 
             <exclusions>
