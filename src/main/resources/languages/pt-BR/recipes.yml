@@ -1,1 +1,170 @@
 ---
+slimefun:
+  multiblock:
+    name: 'Estrutura Multibloco'
+    lore:
+    - 'Construa a estrutura exibida'
+    - 'exatamente como mostrada. Ela não é'
+    - 'fabricada em uma bancada.'
+  enhanced_crafting_table:
+    name: 'Bancada de Trabalho Aprimorada'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Bancada de Trabalho Aprimorada.'
+    - 'Uma bancada comum não é suficiente!'
+  armor_forge:
+    name: 'Forja de Armaduras'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Forja de Armaduras.'
+  grind_stone:
+    name: 'Pedra de Moer'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Pedra de Moer.'
+  smeltery:
+    name: 'Fundição'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Fundição.'
+  ore_crusher:
+    name: 'Britador de Minérios'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando um Britador de Minérios.'
+  mob_drop:
+    name: 'Item Obtido de Criatura'
+    lore:
+    - 'Derrote a criatura indicada para'
+    - 'obter este item.'
+  gold_pan:
+    name: 'Peneira de Ouro'
+    lore:
+    - 'Use uma Peneira de Ouro para'
+    - 'obter este item.'
+  compressor:
+    name: 'Compressor'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando um Compressor.'
+  pressure_chamber:
+    name: 'Câmara de Pressão'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Câmara de Pressão.'
+  ore_washer:
+    name: 'Lavadora de Minérios'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Lavadora de Minérios.'
+  juicer:
+    name: 'Extrator de Suco'
+    lore:
+    - 'Fabrique este suco conforme mostrado'
+    - 'usando um Extrator de Suco.'
+  magic_workbench:
+    name: 'Bancada Mágica'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Bancada Mágica.'
+  ancient_altar:
+    name: 'Altar Ancestral'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando um Altar Ancestral.'
+    - 'Consulte o Altar Ancestral para mais informações.'
+  heated_pressure_chamber:
+    name: 'Câmara de Pressão Aquecida'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Câmara de Pressão Aquecida.'
+  food_fabricator:
+    name: 'Fabricador de Alimentos'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando um Fabricador de Alimentos.'
+  food_composter:
+    name: 'Composteira de Alimentos'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Composteira de Alimentos.'
+  freezer:
+    name: 'Congelador'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando um Congelador.'
+  geo_miner:
+    name: 'Minerador Geológico'
+    lore:
+    - 'Este item pode ser obtido'
+    - 'usando um Minerador Geológico.'
+  nuclear_reactor:
+    name: 'Reator Nuclear'
+    lore:
+    - 'Este item é um subproduto'
+    - 'da operação de um Reator Nuclear.'
+  oil_pump:
+    name: 'Bomba de Petróleo'
+    lore:
+    - 'Este item pode ser obtido'
+    - 'usando uma Bomba de Petróleo.'
+  pickaxe_of_containment:
+    name: 'Picareta de Contenção'
+    lore:
+    - 'Este bloco pode ser obtido'
+    - 'minerando um Gerador de Criaturas'
+    - 'com a Picareta de Contenção.'
+  refinery:
+    name: 'Refinaria'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Refinaria.'
+  barter_drop:
+    name: 'Item Obtido por Troca com Piglin'
+    lore:
+    - 'Faça trocas com Piglins usando'
+    - 'barras de ouro para obter este item.'
+
+minecraft:
+  shaped:
+    name: 'Receita com Formato'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'em uma bancada de trabalho comum.'
+    - 'O formato da receita é importante.'
+  shapeless:
+    name: 'Receita sem Formato'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'em uma bancada de trabalho comum.'
+    - 'Esta receita não exige um formato específico.'
+  furnace:
+    name: 'Receita de Fornalha'
+    lore:
+    - 'Derreta este item em uma Fornalha'
+    - 'para produzir o item desejado.'
+  blasting:
+    name: 'Receita de Alto-forno'
+    lore:
+    - 'Derreta este item em um Alto-forno'
+    - 'para produzir o item desejado.'
+  smoking:
+    name: 'Receita de Defumador'
+    lore:
+    - 'Processe este item em um Defumador'
+    - 'para produzir o item desejado.'
+  campfire:
+    name: 'Receita de Fogueira'
+    lore:
+    - 'Processe este item sobre uma Fogueira'
+    - 'para produzir o item desejado.'
+  stonecutting:
+    name: 'Receita de Cortador de Pedras'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando um Cortador de Pedras.'
+  smithing:
+    name: 'Receita de Bancada de Ferraria'
+    lore:
+    - 'Fabrique este item conforme mostrado'
+    - 'usando uma Bancada de Ferraria.'
