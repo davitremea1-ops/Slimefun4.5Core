@@ -17,7 +17,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.bridge.SF4DataAPI;
  * A very simple API that is meant for adding/getting/clearing custom status effects
  * to/from players.
  * 
- * The effects are stored via {@link PersistentDataAPI} and use NBT data that is
+ * The effects are stored via {@link SF4DataAPI} and use NBT data that is
  * saved across server restarts.
  * 
  * You can specify a level for your status effect too.
