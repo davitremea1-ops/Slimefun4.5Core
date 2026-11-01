@@ -86,6 +86,7 @@ class TestSmithingTableListener {
         Player player = server.addPlayer();
 
         SmithingInventory inv = Mockito.mock(SmithingInventory.class);
+        Mockito.when(inv.getType()).thenReturn(InventoryType.SMITHING);
         MutableObject<ItemStack> result = new MutableObject<>(new ItemStack(Material.NETHERITE_PICKAXE));
 
         Mockito.doAnswer(invocation -> {
