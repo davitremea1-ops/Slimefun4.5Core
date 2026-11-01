@@ -6,8 +6,8 @@
 
 <br>
 
-![Minecraft](https://img.shields.io/badge/MINECRAFT-1.19.4%20%E2%80%94%201.21.11-62b47a?style=for-the-badge&logo=minecraft&logoColor=white)
-![Java](https://img.shields.io/badge/JAVA-17%2B-007396?style=for-the-badge&logo=openjdk&logoColor=white)
+![Minecraft](https://img.shields.io/badge/MINECRAFT-1.21.11-62b47a?style=for-the-badge&logo=minecraft&logoColor=white)
+![Java](https://img.shields.io/badge/JAVA-21-007396?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Licença](https://img.shields.io/badge/LICEN%C3%87A-GPLv3-orange?style=for-the-badge&logo=gnu&logoColor=white)
 ![Status](https://img.shields.io/badge/STATUS-EM%20VALIDA%C3%87%C3%83O-yellow?style=for-the-badge)
 
@@ -26,36 +26,49 @@
 
 <br>
 
-> **Slimefun** transforma seu servidor Minecraft em uma experiência semelhante a um modpack, **sem exigir que os jogadores instalem mods**. O projeto adiciona tecnologia, magia, máquinas automatizadas e centenas de itens personalizados, mantendo o cliente vanilla.
+> **Slimefun** transforma seu servidor Minecraft em uma experiência semelhante a um modpack, sem exigir que os jogadores instalem mods. O projeto adiciona tecnologia, magia, máquinas automatizadas e centenas de itens personalizados.
 >
 > ⚠️ Esta é uma versão modificada e não oficial do Slimefun. Ela não é afiliada nem representa a equipe responsável pelo projeto original.
 
 ---
 
-## 📦 Compatibilidade pretendida
+## 📦 Versão-alvo
 
-| Servidor | Java exigido pelo Paper | API usada na compilação |
-|:---|:---:|:---:|
-| Paper/Purpur 1.19.4 | Java 17 | Paper API 1.19.4 |
-| Paper/Purpur 1.20.x | Java 21 | Paper API 1.19.4 |
-| Paper/Purpur 1.21.x até 1.21.11 | Java 21 | Paper API 1.19.4 |
+| Componente | Versão |
+|:---|:---|
+| Minecraft | **1.21.11** |
+| Servidor | **Paper / Purpur** |
+| Java | **21** |
+| API Paper usada na compilação | **1.21.11** |
+| Idioma padrão | **Português do Brasil** |
 
-O projeto está sendo preparado para usar a API mais antiga como base e gerar bytecode Java 17, com o objetivo de manter um único JAR entre as versões listadas. A compatibilidade precisa ser confirmada pelos testes de compilação e por testes de inicialização em cada família de servidor.
+Este fork é direcionado a servidores **Minecraft 1.21.11**. A meta de compatibilidade desta versão é manter add-ons existentes do ecossistema Slimefun funcionando sem exigir que o servidor volte para uma versão antiga do Minecraft.
 
-**Importante:** isso não significa que todos os add-ons de terceiros funcionem em todas essas versões. Cada add-on precisa ser compatível com a API do Slimefun e com a versão do servidor em que será executado.
+## 🧩 Compatibilidade com add-ons
+
+O trabalho de compatibilidade prioriza a API pública e os contratos binários que add-ons antigos esperam encontrar.
+
+Entre os pontos preservados/restaurados estão:
+
+- `SlimefunItemStack` continua sendo um `org.bukkit.inventory.ItemStack`, permitindo passá-lo diretamente a métodos Bukkit/Paper que recebem `ItemStack`.
+- O método `SlimefunItemStack.lock()` continua disponível.
+- O gancho protegido `SlimefunItem.isItemStackImmutable()` continua disponível para add-ons que o sobrescrevem.
+- A exceção `WrongItemStackException` continua disponível.
+- O método `clone()` mantém a ponte binária com retorno `ItemStack` exigida por código compilado contra a API antiga.
+
+**Limite importante:** isso restaura compatibilidade em partes da API do Slimefun, mas não pode garantir que todo add-on funcione automaticamente. Add-ons que dependem de APIs internas removidas, NMS, versões próprias do Paper ou bibliotecas de terceiros precisam ser testados individualmente.
 
 ---
 
 ## 📊 Estado do fork
 
-- **Base do projeto:** Slimefun4Core.
-- **Versão mínima em validação:** Paper/Purpur 1.19.4.
-- **Versão máxima em validação:** Paper/Purpur 1.21.11.
-- **Versão do Java para compilar:** Java 17.
-- **Idioma padrão:** Português do Brasil.
+- **Servidor-alvo:** Paper/Purpur 1.21.11.
+- **Java de compilação:** Java 21.
+- **Compatibilidade de add-ons:** API legada em restauração e validação.
+- **Tradução:** arquivos de idioma PT-BR completos em relação às chaves do idioma inglês.
 - **Licença:** GNU GPL v3.
 
-> ⚠️ Não considere esta versão pronta para produção até que o CI passe e ela seja testada em servidores de cada versão-alvo. Faça backup antes de substituir o JAR em um servidor existente.
+> ⚠️ Não considere esta versão pronta para produção até que o CI passe e os add-ons que você usa sejam testados em um servidor 1.21.11. Faça backup antes de substituir o JAR em um servidor existente.
 
 ---
 
@@ -119,8 +132,6 @@ As imagens abaixo são provenientes do projeto e da comunidade Slimefun original
 
 ## 🌐 Comunidade e suporte
 
-Entre na comunidade para conversar, acompanhar atualizações e relatar problemas.
-
 - [Discord](https://discord.gg/hJwXe3tw4)
 - [Relatar um problema neste fork](https://github.com/davitremea1-ops/Slimefun4.5Core/issues)
 - [Wiki do Slimefun original](https://github.com/Slimefun/Slimefun4/wiki)
@@ -139,7 +150,7 @@ Entre na comunidade para conversar, acompanhar atualizações e relatar problema
 | 🛠️ Manutenção desta versão modificada | **R2Ksanu** |
 | 📸 Imagens | Comunidade original do Slimefun |
 
-Este projeto segue a **GNU General Public License v3.0 (GPLv3)**. As modificações e redistribuições devem respeitar os termos dessa licença e preservar os créditos exigidos. Consulte o arquivo [LICENSE](LICENSE) para ver o texto completo.
+Este projeto segue a **GNU General Public License v3.0 (GPLv3)**. As modificações e redistribuições devem respeitar os termos dessa licença e preservar os créditos exigidos. Consulte [LICENSE](LICENSE) para ver o texto completo.
 
 <div align="center">
 
