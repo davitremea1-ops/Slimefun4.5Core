@@ -9,10 +9,16 @@ commands:
   search: Pesquisa no seu Guia o termo especificado
   open_guide: Abre o guia do Slimefun sem usar o livro
   stats: Mostra algumas estatísticas sobre um jogador
+  update: Verifica se há atualizações do Slimefun
+  timings:
+    description: Mede o desempenho do Slimefun e de seus add-ons
+    please-wait: '&eAguarde um instante... Os resultados estão chegando!'
+    verbose-player: '&4Jogadores não podem usar a opção verbose!'
+    unknown-flag: '&4Opção desconhecida: &c%flag%'
   research:
     description: Desbloqueia/Redefine pesquisas para um jogador
-    reset: '&cVocê redifiniu o Conhecimento de %player%'
-    reset-target: '&cSeu Conhecimento foi redefinido'
+    reset: '&cVocê redefiniu o conhecimento de %player%'
+    reset-target: '&cseu conhecimento foi redefinido'
   backpack:
     description: Recuperar uma cópia de uma mochila existente
     invalid-id: '&4O id deve ser um número não negativo!'
@@ -48,7 +54,7 @@ guide:
     versions-notice: 'Isso é muito importante ao relatar erros!'
     wiki: 'Veja mais sobre esse item na Wiki oficial do Slimefun'
     recipes:
-      machine: 'Receitas utilizadas nessa maquina'
+      machine: 'Receitas utilizadas nesta máquina'
       miner: 'Recursos que você pode obter com essa Mineradora'
       generator: 'Tipos disponíveis de combustível'
       gold-pan: 'Recursos que você pode obter'
@@ -72,13 +78,51 @@ guide:
       - '&7Agora você tem a opção de alterar'
       - '&7o idioma no qual Slimefun'
       - '&7será apresentado a você. Itens'
-      - '&7não podem ser traduzido por enquanto.'
+      - '&7não podem ser traduzidos por enquanto.'
     translations:
       name: '&aHá algum idioma faltando?'
       lore: 'Clique aqui para adicionar seu próprio idioma'
+  modes:
+    selected: 'Tipo do Guia do Slimefun: '
+    change: 'Clique para alterar o tipo'
+    SURVIVAL_MODE: 'Modo Sobrevivência'
+    CHEAT_MODE: 'Lista de Itens'
+  options:
+    fireworks:
+      enabled:
+        text:
+        - '&bFogos de artifício: &aSim'
+        - ''
+        - '&7Agora você pode escolher se deseja'
+        - '&7ver fogos de artifício ao pesquisar um item.'
+        click: '&eClique para desativar os fogos de artifício'
+      disabled:
+        text:
+        - '&bFogos de artifício: &4Não'
+        - ''
+        - '&7Agora você pode escolher se deseja'
+        - '&7ver fogos de artifício ao pesquisar um item.'
+        click: '&eClique para ativar os fogos de artifício'
+    learning-animation:
+      enabled:
+        text:
+        - '&bAnimação de aprendizado: &aSim'
+        - ''
+        - '&7Você pode escolher se deseja'
+        - '&7ver informações no chat sobre o item'
+        - '&7que está pesquisando.'
+        click: '&eClique para desativar a animação de aprendizado'
+      disabled:
+        text:
+        - '&bAnimação de aprendizado: &4Não'
+        - ''
+        - '&7Você pode escolher se deseja'
+        - '&7ver informações no chat sobre o item'
+        - '&7que está pesquisando.'
+        click: '&eClique para ativar a animação de aprendizado'
   title:
     main: 'Guia do Slimefun'
-    settings: 'Config & Info'
+    settings: 'Configurações e informações'
     languages: 'Selecione seu idioma preferido'
     credits: 'Contribuidores do Slimefun4'
     wiki: 'Wiki do Slimefun4'
@@ -87,8 +131,8 @@ guide:
     source: 'Código Fonte'
     versions: 'Versões instaladas'
   credits:
-    commit: 'Comissão'
-    commits: 'Comissões'
+    commit: 'Commit'
+    commits: 'Commits'
     profile-link: 'Clique aqui para visitar o perfil deles no GitHub'
     open: 'Clique para ver nossos colaboradores'
     description:
@@ -101,11 +145,14 @@ guide:
       wiki: '&3Editor(a) da Wiki'
       resourcepack: '&cArtista de ResourcePack'
       translator: '&9Tradutor(a)'
+actionbar:
+  radiation: '&6Nível de exposição à radiação: &c%level%&7/&e100'
 messages:
   not-enough-xp: '&4Você não tem XP suficiente para desbloquear isso!'
   unlocked: '&bVocê desbloqueou &7"%research%"&b.'
   only-players: '&4Este comando é apenas para jogadores'
-  unknown-player: '&4Jogador Desconhecido: &c%player%&4.'
+  unknown-player: '&4Jogador desconhecido: &c%player%&4.'
+  not-researched: '&4Você ainda não tem conhecimento suficiente. &cDesbloqueie &f"%item%&f" primeiro.'
   no-permission: '&4Você não tem a permissão necessária para fazer isso.'
   usage: '&4Uso: &c%usage%'
   not-online: '&4%player% &cnão está online!'
@@ -114,7 +161,7 @@ messages:
   given-item: '&bVocê deu  &a%amount% &7"%item%&7"'
   give-item: '&bVocê deu para %player% &a%amount% &7"%item%&7"'
   invalid-research: '&4%research% &cnão é uma Pesquisa válida!'
-  give-research: '&bVocêu deu para %player% a Pesquisa &7"%research%&7"'
+  give-research: '&bVocê deu para %player% a Pesquisa &7"%research%&7"'
   hungry: '&cVocê está com muita fome para fazer isso!'
   disabled-in-world: '&4&lEste item foi desativado neste mundo.'
   disabled-item: '&4&lEste item foi desativado! Como você conseguiu isso?'
@@ -126,9 +173,11 @@ messages:
     mode-change: '&b%device% modo alterado para: &9%mode%'
     not-shears: '&cA Multi Tool não pode ser usada como tesoura!'
   talisman:
-    anvil: '&a&oSeu Talismã salvou sua ferramenta de quebrar.'
-    miner: '&a&oSeu talismã dobrou os drops.'
-    hunter: '&a&oSeu talismã dobrou os minerios.'
+    anvil: '&a&oSeu talismã salvou sua ferramenta de quebrar.'
+    miner: '&a&oSeu talismã dobrou os itens obtidos.'
+    hunter: '&a&oSeu talismã dobrou os minérios obtidos.'
+    farmer: '&a&oSeu talismã dobrou os itens obtidos.'
+    wise: '&a&oSeu talismã dobrou a experiência recebida.'
     lava: '&a&oSeu talismã salvou você de queimar até a morte.'
     water: '&a&oSeu talismã salvou você de se afogar.'
     angel: '&a&oSeu talismã salvou você de sofrer dano de queda.'
@@ -180,14 +229,44 @@ messages:
     - '&7Nunca cave para baixo!'
     - '&7É apenas uma ferida de carne!'
     - '&7Sempre olhe para o lado positivo da vida!'
-    - '&7Este foi realmente um bolacha e não um biscoito'
+    - '&7Este foi realmente uma bolacha e não um biscoito'
     - '&7Os sinais de néon estão ILUMINADOS!'
+  deprecated-item: '&4Este item foi descontinuado e será removido do Slimefun em breve.'
+  researching-is-disabled: '&cAs pesquisas estão desativadas neste servidor. Todos os itens já estão desbloqueados!'
+  await-deletion: '&cVocê precisa aguardar um pouco após quebrar um bloco do Slimefun antes de colocar outro.'
+  above-limit-level: '&cNão é possível (des)encantar um encantamento acima do nível %level%!'
+  pickaxe-of-the-seeker:
+    no-ores: '&cNão foi possível encontrar minérios nas proximidades!'
+  auto-crafting:
+    select-a-recipe: '&eAgache e clique com o botão direito neste bloco segurando o item que deseja fabricar.'
+    recipe-set: '&aA receita desta máquina foi configurada com sucesso.'
+    recipe-removed: '&eA receita foi removida desta máquina. Você pode definir outra a qualquer momento!'
+    no-recipes: '&cNenhuma receita válida foi encontrada para o item que você está segurando.'
+    missing-chest: '&cBaú ausente! As máquinas de fabricação automática precisam ficar sobre um baú.'
+    select: 'Selecionar esta receita'
+    temporarily-disabled: '&eEsta máquina de fabricação automática foi desativada temporariamente. Você pode reativá-la quando quiser!'
+    re-enabled: '&eEsta máquina de fabricação automática foi reativada!'
+    recipe-unavailable: |
+      &cEste item está desativado no servidor ou ainda não foi desbloqueado.
+      &7Tente fabricar o item primeiro para liberar a receita.
+    tooltips:
+      enabled:
+      - '&aEsta receita está ativada'
+      - ''
+      - '&eClique esquerdo &7para desativá-la temporariamente'
+      - '&eClique direito &7para remover esta receita'
+      disabled:
+      - '&cEsta receita está desativada'
+      - ''
+      - '&eClique esquerdo &7para reativá-la'
+      - '&eClique direito &7para remover esta receita'
 machines:
   pattern-not-found: '&eDesculpe, não pude reconhecer esta receita. Coloque os itens no padrão correto no Ejetor.'
   unknown-material: '&eDesculpe, não pude reconhecer o item no meu ejetor. Por favor, coloque algo que eu sei.'
   wrong-item: '&eDesculpe, não pude reconhecer o item com o qual você clica com o botão direito. Verifique as receitas e veja quais itens você pode usar.'
   full-inventory: '&eDesculpe, meu inventário está muito cheio!'
-  in-use: '&cO inventário deste bloco está atualmente aberto por um jogador diferente.'
+  in-use: '&cO inventário deste bloco já está aberto por outro jogador.'
+  inventory-empty: '&6Você construiu este multibloco com sucesso. Coloque os itens no ejetor e clique nele novamente para fabricar o item desejado!'
   ignition-chamber-no-flint: '&cEstá faltando uma Pederneira na Câmara de Ignição.'
   ANCIENT_ALTAR:
     not-enough-pedestals: '&4O altar não está rodeado pela quantidade necessária de pedestais &c(%pedestals% de 8)&4.'
@@ -202,7 +281,10 @@ machines:
     no-destinations: '&4Nenhum destino encontrado!'
     pick-a-floor: '&3- Escolha um andar -'
     current-floor: '&eEste é o andar em que você está atualmente:'
-    click-to-teleport: '&eClique aqui &7para teleportar-se para o andar:'
+    click-to-teleport: '&eClique aqui &7para se teleportar para este andar:'
+    enter-name: '&7Digite no chat o nome desejado para este andar. &f(Códigos de cor são aceitos!)'
+    named: '&2Andar nomeado com sucesso: &f%floor%'
+    editor-title: 'Configurar este elevador'
   TELEPORTER:
     teleporting: '&3Teleportando-se...'
     teleported: '&3Teleportado(a)!'
@@ -217,7 +299,9 @@ machines:
     transmitters: 'Informação de Transmissores'
     waypoints: 'Informação de Locais de Teleporte'
   CARGO_NODES:
-    must-be-placed: '&4Deve ser colocado em um baú ou uma máquina!'
+    must-be-placed: '&4Precisa ser colocado sobre um baú ou uma máquina!'
+    connected: '&2Conectado!'
+    not-connected: '&4Sem conexão!'
   INDUSTRIAL_MINER:
     no-fuel: '&aSua mineradora industrial ficou sem combustível! Coloque seu combustível no peito acima.'
     piston-facing: '&cSua Mineradora Industrial exige pistões para cima!'
@@ -228,8 +312,10 @@ machines:
     no-permission: '&4Você não parece ter permissão para operar uma Mineradora industrial aqui!'
     finished: '&eSua Mineradora Industrial terminou! Obteve um total de %ores% minério (s)!'
 anvil:
-  not-working: '&4Você não pode usar os itens do Slimefun em uma bigorna!'
+  not-working: '&4Você não pode usar itens do Slimefun em uma bigorna!'
   mcmmo-salvaging: '&4Você não pode reciclar itens do Slimefun!'
+smithing_table:
+  not-working: '&4Você não pode usar itens do Slimefun como material de ferraria!'
 brewing_stand:
   not-working: '&4Você não pode usar itens Slimefun em um Suporte de poções!'
 cartography_table:
@@ -244,7 +330,9 @@ workbench:
 cauldron:
   no-discoloring: '&4Você não pode descolorir uma Armadura do Slimefun'
 gps:
-  deathpoint: '&4Ponto de Morte &7%date%'
+  deathpoint: '&4Ponto de morte &7%date%'
+  status-online: 'CONECTADO'
+  status-offline: 'DESCONECTADO'
   waypoint:
     new: '&eDigite o nome do WayPoint no bate-papo. &7(Códigos de cores suportados!)'
     added: '&aNovo WayPoint adicionado com sucesso.'
@@ -263,7 +351,8 @@ android:
   stopped: '&7Seu Android pausou o script.'
   scripts:
     already-uploaded: '&4Este script já foi enviado.'
-    editor: 'Editor de Scripts'
+    editor: 'Editor de scripts'
+    too-long: '&cEste script é longo demais para ser editado!'
     instructions:
       START: '&2Iniciar Script'
       REPEAT: '&9Repetir Script'
@@ -325,7 +414,7 @@ languages:
   pt: 'Português (Portugal)'
   pt-BR: 'Português (Brasil)'
   ar: 'Árabe'
-  af: 'Africano'
+  af: 'Africâner'
   da: 'Dinamarquês'
   fi: 'Finlandês'
   uk: 'Ucraniano'
@@ -335,11 +424,13 @@ languages:
   fa: 'Persa'
   th: 'Tailandês'
   tl: 'Tagalog'
-  ro: 'Romena'
+  ro: 'Romeno'
   bg: 'Búlgaro'
   ko: 'Coreano'
   tr: 'Turco'
-  hr: 'Croatian'
-  mk: 'Macedonian'
-  sr: 'Serbian'
-  be: 'Belarusian'
+  hr: 'Croata'
+  mk: 'Macedônio'
+  sr: 'Sérvio'
+  be: 'Bielorrusso'
+  si-LK: 'Cingalês'
+  lt: 'Lituano'
