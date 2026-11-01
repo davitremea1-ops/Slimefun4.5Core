@@ -23,7 +23,7 @@ slimefun:
   battery: Sua Primeira Bateria
   steel_plate: Chapeamento de Aço
   steel_thruster: Propulsor de Aço
-  parachute: Pára-quedas
+  parachute: Paraquedas
   grappling_hook: Gancho de Agarrar
   jetpacks: Jetpacks
   multitools: Multi Ferramentas
@@ -51,7 +51,7 @@ slimefun:
   reinforced_armor: Armadura Reforçada
   ore_washer: Lavadora de Minérios
   gold_carats: Ouro Puro
-  silicon: Vale de Silíco
+  silicon: Vale do Silício
   fire_staff: Cajado de Fogo
   smelters_pickaxe: Picareta de Fundição
   common_talisman: Talismã Comum
@@ -63,7 +63,7 @@ slimefun:
   angel_talisman: Talismã do Anjo
   fire_talisman: Talismã de Fogo
   caveman_talisman: Talismã do Homem das Cavernas
-  lava_crystal: Situação de Fogo
+  lava_crystal: Cristal de Lava
   magician_talisman: Talismã do Mágico
   traveller_talisman: Talismã do Viajante
   warrior_talisman: Talismã do Guerreiro
@@ -75,10 +75,10 @@ slimefun:
   wizard_talisman: Talismã do Mago
   lumber_axe: Machado de Madeira
   hazmat_suit: Traje de Proteção
-  uranium: Radioativo
+  uranium: Radioatividade
   crushed_ore: Purificação de Minério
   redstone_alloy: Liga de Redstone
-  carbonado_tools: Máquinas de Primeira Linha
+  carbonado_tools: Ferramentas de Carbonado
   first_aid: Primeiros Socorros
   gold_armor: Armadura Brilhante
   night_vision_googles: Óculos de Visão Noturna
@@ -136,7 +136,7 @@ slimefun:
   special_runes: Runas Roxas
   infernal_bonemeal: Farinha de Osso Infernal
   rainbow_blocks: Blocos Coloridos
-  infused_hopper: Funil Infudido
+  infused_hopper: Funil Infundido
   wither_proof_glass: Vidro à Prova de Wither
   duct_tape: Fita Adesiva
   plastic_sheet: Plástico
@@ -247,3 +247,17 @@ slimefun:
   iron_golem_assembler: Golems de Ferro Automatizados
   villager_rune: Resetador de trocas dos aldeões
   elytra_cap: Engrenagem de colisão
+  wise_talisman: Talismã do Sábio
+  medium_tier_electric_ingot_machines: Fabricação Rápida de Barras
+  trident: Tridente
+  bee_armor: Armadura de Abelha
+  book_binder: Encadernação de Livros de Encantamento
+  auto_crafting: Fabricação Automática
+  produce_collector: Ordenha Automática
+  improved_generators: Geradores Aprimorados
+  ingredients_and_cheese: Culinária do Slimefun
+  medium_tier_auto_enchanting: Encantamento e Desencantamento Automáticos Rápidos
+  portable_teleporter: Teletransporte de Qualquer Lugar
+  farmer_talisman: Talismã do Fazendeiro
+  rainbow_armor: Quero Ver o Arco-Íris no Céu
+
