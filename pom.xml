@@ -26,14 +26,14 @@
         <short.build.number>2600</short.build.number>
 
         <!-- Target Java 21 -->
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <!-- Run tests using java 21 -->
-        <maven.compiler.testSource>21</maven.compiler.testSource>
-        <maven.compiler.testTarget>21</maven.compiler.testTarget>
+        <maven.compiler.testSource>17</maven.compiler.testSource>
+        <maven.compiler.testTarget>17</maven.compiler.testTarget>
 
         <!-- Spigot properties -->
-        <paper.version>1.21.11</paper.version>
+        <paper.version>1.19.4</paper.version>
         <paper.javadocs>https://hub.spigotmc.org/javadocs/spigot/</paper.javadocs>
 
         <!-- Default settings for sonarcloud.io -->
@@ -131,57 +131,6 @@
                         <exclude>**/package-info.java</exclude>
                     </excludes>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <!-- Compatibility: update the short YYNN build number before packaging. -->
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.5.0</version>
-
-                <executions>
-                    <execution>
-                        <id>update-short-build-number</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>exec</goal>
-                        </goals>
-                        <configuration>
-                            <executable>powershell</executable>
-                            <arguments>
-                                <argument>-NoProfile</argument>
-                                <argument>-ExecutionPolicy</argument>
-                                <argument>Bypass</argument>
-                                <argument>-File</argument>
-                                <argument>${project.basedir}/build-tools/update-build-number.ps1</argument>
-                                <argument>${project.basedir}/.mvn/build-number.properties</argument>
-                                <argument>${maven.build.timestamp}</argument>
-                            </arguments>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <!-- Compatibility: load the generated YYNN build number into Maven properties. -->
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>properties-maven-plugin</artifactId>
-                <version>1.2.1</version>
-
-                <executions>
-                    <execution>
-                        <id>load-short-build-number</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>read-project-properties</goal>
-                        </goals>
-                        <configuration>
-                            <files>
-                                <file>${project.basedir}/.mvn/build-number.properties</file>
-                            </files>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
@@ -500,8 +449,8 @@
         <!-- This needs to be before Spigot because MockBukkit will fail otherwise. -->
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.21</artifactId>
-            <version>3.133.2</version>
+            <artifactId>MockBukkit-v1.19</artifactId>
+            <version>3.0.0</version>
             <scope>test</scope>
 
             <exclusions>
@@ -634,4 +583,109 @@
             </exclusions>
         </dependency>
     </dependencies>
+    <profiles>
+        <!-- Keep the short build-number update cross-platform. -->
+        <profile>
+            <id>update-build-number-unix</id>
+            <activation>
+                <os>
+                    <family>unix</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.5.0</version>
+                        <executions>
+                            <execution>
+                                <id>update-short-build-number</id>
+                                <phase>initialize</phase>
+                                <goals><goal>exec</goal></goals>
+                                <configuration>
+                                    <executable>sh</executable>
+                                    <arguments>
+                                        <argument>${project.basedir}/build-tools/update-build-number.sh</argument>
+                                        <argument>${project.basedir}/.mvn/build-number.properties</argument>
+                                        <argument>${maven.build.timestamp}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>properties-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>load-short-build-number</id>
+                                <phase>initialize</phase>
+                                <goals><goal>read-project-properties</goal></goals>
+                                <configuration>
+                                    <files>
+                                        <file>${project.basedir}/.mvn/build-number.properties</file>
+                                    </files>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>update-build-number-windows</id>
+            <activation>
+                <os>
+                    <family>windows</family>
+                </os>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>3.5.0</version>
+                        <executions>
+                            <execution>
+                                <id>update-short-build-number</id>
+                                <phase>initialize</phase>
+                                <goals><goal>exec</goal></goals>
+                                <configuration>
+                                    <executable>powershell</executable>
+                                    <arguments>
+                                        <argument>-NoProfile</argument>
+                                        <argument>-ExecutionPolicy</argument>
+                                        <argument>Bypass</argument>
+                                        <argument>-File</argument>
+                                        <argument>${project.basedir}/build-tools/update-build-number.ps1</argument>
+                                        <argument>${project.basedir}/.mvn/build-number.properties</argument>
+                                        <argument>${maven.build.timestamp}</argument>
+                                    </arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>properties-maven-plugin</artifactId>
+                        <version>1.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>load-short-build-number</id>
+                                <phase>initialize</phase>
+                                <goals><goal>read-project-properties</goal></goals>
+                                <configuration>
+                                    <files>
+                                        <file>${project.basedir}/.mvn/build-number.properties</file>
+                                    </files>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
