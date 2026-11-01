@@ -33,7 +33,7 @@ public class InventoryViewWrapper extends InventoryViewMock {
                                  Inventory bottom,
                                  InventoryType type,
                                  @Nonnull InventoryView backingView) {
-        super(player, name, top, bottom, type);
+        super(player, top, bottom, type);
         this.backingView = backingView;
     }
 
