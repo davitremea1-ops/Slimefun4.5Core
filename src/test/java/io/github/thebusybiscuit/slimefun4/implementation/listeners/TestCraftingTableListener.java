@@ -69,6 +69,7 @@ class TestCraftingTableListener {
         Player player = server.addPlayer();
 
         CraftingInventory inv = Mockito.mock(CraftingInventory.class);
+        Mockito.when(inv.getType()).thenReturn(InventoryType.WORKBENCH);
         MutableObject result = new MutableObject(new ItemStack(Material.EMERALD));
 
         Mockito.doAnswer(invocation -> {
