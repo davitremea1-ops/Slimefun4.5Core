@@ -161,25 +161,7 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <!-- Atualiza os testes para o namespace e contratos do MockBukkit 4.x. -->
-                <groupId>org.openrewrite.maven</groupId>
-                <artifactId>rewrite-maven-plugin</artifactId>
-                <version>5.42.2</version>
-                <configuration>
-                    <activeRecipes>
-                        <recipe>org.mockbukkit.rewrite.PackageRename</recipe>
-                        <recipe>org.mockbukkit.rewrite.ClassRename</recipe>
-                    </activeRecipes>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.mockbukkit.rewrite</groupId>
-                        <artifactId>openrewrite-recipes</artifactId>
-                        <version>1.0.2</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
+
 
             <plugin>
                 <!-- Sonarcloud Scanner -->
