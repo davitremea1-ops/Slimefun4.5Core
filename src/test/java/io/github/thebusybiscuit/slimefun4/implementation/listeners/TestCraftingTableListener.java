@@ -8,6 +8,7 @@ import org.bukkit.event.Event.Result;
 import org.bukkit.event.inventory.ClickType;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryAction;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.inventory.InventoryType.SlotType;
 import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.inventory.CraftingInventory;
@@ -54,6 +55,7 @@ class TestCraftingTableListener {
         Player player = server.addPlayer();
 
         CraftingInventory inv = Mockito.mock(CraftingInventory.class);
+        Mockito.when(inv.getType()).thenReturn(InventoryType.WORKBENCH);
         Mockito.when(inv.getContents()).thenReturn(new ItemStack[] { item, null, null, null, null, null, null, null, null });
 
         InventoryView view = player.openInventory(inv);
