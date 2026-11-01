@@ -353,7 +353,8 @@ public class SlimefunItemStack extends ItemStack {
      * @return underlying ItemStack used
      */
     public @Nonnull ItemStack item() {
-        return super.clone();
+        // Return a plain Bukkit ItemStack copy, not another locked SlimefunItemStack.
+        return new ItemStack(this);
     }
 
     public Material getType() {
