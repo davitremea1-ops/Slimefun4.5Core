@@ -215,10 +215,15 @@ public enum MinecraftVersion {
      * @return Whether this {@link MinecraftVersion} matches the specified version id
      */
     public boolean isMinecraftVersion(int minecraftVersion, int patchVersion) {
-        return !isVirtual()
-            && this.majorVersion == minecraftVersion
-            && (this.minorVersion == -1 || this.minorVersion <= patchVersion)
-                && (this.maxMinorVersion == -1 || patchVersion <= this.maxMinorVersion);
+        if (isVirtual() || this.majorVersion != minecraftVersion) {
+            return false;
+        }
+
+        // A negative patch version means that only the major version was supplied.
+        // In that case, do not reject version families with a bounded patch range.
+        return patchVersion < 0
+            || ((this.minorVersion == -1 || this.minorVersion <= patchVersion)
+                && (this.maxMinorVersion == -1 || patchVersion <= this.maxMinorVersion));
     }
 
     /**
