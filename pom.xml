@@ -14,8 +14,8 @@
     <packaging>jar</packaging>
 
     <!-- Project Info -->
-    <description>Slimefun is a Paper plugin that simulates a modpack-like atmosphere by adding over 500 new items and recipes to your Minecraft Server.</description>
-    <url>https://github.com/Slimefun/Slimefun4</url>
+    <description>O Slimefun é um plugin para Paper que transforma o servidor em uma experiência semelhante a um modpack, adicionando centenas de itens e receitas.</description>
+    <url>https://github.com/davitremea1-ops/Slimefun4.5Core</url>
 
     <properties>
         <!-- UTF-8 is our standard encoding for source files -->
@@ -25,16 +25,16 @@
         <!-- Compatibility: jar names use compact rolling build numbers such as 2601, 2699, 2700. -->
         <short.build.number>2600</short.build.number>
 
-        <!-- Target Java 21 -->
+        <!-- Gera bytecode compatível com Java 17. -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <!-- Run tests using java 21 -->
+        <!-- Os testes também são compilados para Java 17. -->
         <maven.compiler.testSource>17</maven.compiler.testSource>
         <maven.compiler.testTarget>17</maven.compiler.testTarget>
 
-        <!-- Spigot properties -->
+        <!-- Propriedades da API Paper -->
         <paper.version>1.19.4</paper.version>
-        <paper.javadocs>https://hub.spigotmc.org/javadocs/spigot/</paper.javadocs>
+        <paper.javadocs>https://jd.papermc.io/paper/1.19.4/</paper.javadocs>
 
         <!-- Default settings for sonarcloud.io -->
         <sonar.projectKey>Slimefun_Slimefun4</sonar.projectKey>
@@ -45,9 +45,9 @@
     </properties>
 
     <issueManagement>
-        <!-- Bug Tracker -->
+        <!-- Rastreador de problemas deste fork -->
         <system>GitHub Issues</system>
-        <url>https://github.com/Slimefun/Slimefun4/issues</url>
+        <url>https://github.com/davitremea1-ops/Slimefun4.5Core/issues</url>
     </issueManagement>
 
     <licenses>
