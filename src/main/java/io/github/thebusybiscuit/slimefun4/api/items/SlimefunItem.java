@@ -31,6 +31,7 @@ import io.github.thebusybiscuit.slimefun4.api.exceptions.IdConflictException;
 import io.github.thebusybiscuit.slimefun4.api.exceptions.IncompatibleItemHandlerException;
 import io.github.thebusybiscuit.slimefun4.api.exceptions.MissingDependencyException;
 import io.github.thebusybiscuit.slimefun4.api.exceptions.UnregisteredItemException;
+import io.github.thebusybiscuit.slimefun4.api.exceptions.WrongItemStackException;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
 import io.github.thebusybiscuit.slimefun4.api.researches.Research;
@@ -499,6 +500,11 @@ public class SlimefunItem implements Placeable {
                 this.itemHandlers.clear();
             }
 
+            // Lock the SlimefunItemStack from accidental mutations, as in the legacy API.
+            if (itemStackTemplate instanceof SlimefunItemStack stack && isItemStackImmutable()) {
+                stack.lock();
+            }
+
             postRegister();
 
             // handle runtime-registrations / auto-loading
@@ -580,6 +586,17 @@ public class SlimefunItem implements Placeable {
      * @param addon
      *            The {@link SlimefunAddon} trying to register this {@link SlimefunItem}
      */
+    /**
+     * Returns whether the original {@link SlimefunItemStack} of this item is immutable.
+     *
+     * <p>Kept as a protected extension point for existing Slimefun add-ons.</p>
+     *
+     * @return whether the original item stack should be locked after registration
+     */
+    protected boolean isItemStackImmutable() {
+        return true;
+    }
+
     private void checkDependencies(@Nonnull SlimefunAddon addon) {
         if (!addon.hasDependency("Slimefun")) {
             throw new MissingDependencyException(addon, "Slimefun");
