@@ -39,11 +39,10 @@ jobs:
           cache: maven
 
       - name: Migrar testes MockBukkit 3 para 4
-        run: >
-          mvn --batch-mode --no-transfer-progress
-          org.openrewrite.maven:rewrite-maven-plugin:5.42.2:run
-          -Drewrite.recipeArtifactCoordinates=org.mockbukkit.rewrite:openrewrite-recipes:1.0.2
-          -Drewrite.activeRecipes=org.mockbukkit.rewrite.PackageRename,org.mockbukkit.rewrite.ClassRename
+        run: |
+          mvn --batch-mode --no-transfer-progress org.openrewrite.maven:rewrite-maven-plugin:run \
+            -Drewrite.recipeArtifactCoordinates=org.mockbukkit.rewrite:openrewrite-recipes:1.0.2 \
+            -Drewrite.activeRecipes=org.mockbukkit.rewrite.PackageRename,org.mockbukkit.rewrite.ClassRename
 
       - name: Executar testes e empacotar
         run: mvn --batch-mode --no-transfer-progress clean verify --file pom.xml
