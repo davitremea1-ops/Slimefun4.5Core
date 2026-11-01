@@ -262,6 +262,11 @@
                                     <fileset dir="${project.basedir}/src/test/java"
                                              includes="**/*.java"/>
                                 </replace>
+                                <replace token="org.mockbukkit.mockbukkit.WorldMock"
+                                         value="org.mockbukkit.mockbukkit.world.WorldMock">
+                                    <fileset dir="${project.basedir}/src/test/java"
+                                             includes="**/*.java"/>
+                                </replace>
                             </target>
                         </configuration>
                     </execution>
