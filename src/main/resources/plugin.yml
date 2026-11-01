@@ -9,7 +9,7 @@ description: O Slimefun transforma seu servidor em uma experiência semelhante a
 
 # Configurações técnicas
 main: io.github.thebusybiscuit.slimefun4.implementation.Slimefun
-api-version: '1.19'
+api-version: '1.21'
 
 # Dependências opcionais do Slimefun.
 softdepend:
