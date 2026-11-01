@@ -1,269 +1,190 @@
 <div align="center">
 
-# ⛏️ SlimeFunCore 4.0v ⛏️
-### <sub>✨ UNOFFICIAL MODIFIED VERSION ✨</sub>
-### <sub>Maintained by **R2Ksanu**</sub>
+# ⛏️ SlimefunCore 4.0
+
+### Fork não oficial do Slimefun 4 — Paper 1.21.11
+
+![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11-62b47a?style=for-the-badge&logo=minecraft&logoColor=white)
+![Paper API](https://img.shields.io/badge/Paper%20API-1.21.11-blue?style=for-the-badge)
+![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![Licença](https://img.shields.io/badge/Licen%C3%A7a-GPL--3.0-orange?style=for-the-badge&logo=gnu&logoColor=white)
 
 <br>
 
-![Minecraft Version](https://img.shields.io/badge/MINECRAFT-1.21.x-62b47a?style=for-the-badge&logo=minecraft&logoColor=white)
-![Java Version](https://img.shields.io/badge/JAVA-21%2B-007396?style=for-the-badge&logo=openjdk&logoColor=white)
-![License](https://img.shields.io/badge/LICENSE-GPLv3-orange?style=for-the-badge&logo=gnu&logoColor=white)
-![Status](https://img.shields.io/badge/STATUS-ACTIVE-brightgreen?style=for-the-badge&logo=statuspage&logoColor=white)
-
-<br>
-
-<img src="https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase1.png" width="600" style="border-radius:14px;box-shadow:0 8px 24px rgba(0,0,0,0.35)">
+<img src="https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase1.png" width="620" alt="Demonstração do Slimefun">
 
 <br><br>
 
-**[💬 DISCORD](https://discord.gg/hJwXe3tw4)** &nbsp;•&nbsp;
-**[🐞 REPORT A BUG](https://github.com/rutwok-labs/SlimefunCore-V.4.0/issues)** &nbsp;•&nbsp;
-**[📖 ORIGINAL WIKI](https://github.com/Slimefun/Slimefun4/wiki)** &nbsp;•&nbsp;
-**[❤️ ORIGINAL PROJECT](https://github.com/Slimefun/Slimefun4)**
+**[Repositório](https://github.com/davitremea1-ops/Slimefun4.5Core)** ·
+**[Pull Request de compatibilidade](https://github.com/davitremea1-ops/Slimefun4.5Core/pull/1)** ·
+**[Relatar um problema](https://github.com/davitremea1-ops/Slimefun4.5Core/issues)** ·
+**[Wiki original](https://github.com/Slimefun/Slimefun4/wiki)** ·
+**[Projeto original](https://github.com/Slimefun/Slimefun4)**
 
 </div>
-
-<br>
-
-> **Slimefun** turns your Minecraft server into a full-blown modpack — **without installing a single mod.** Advanced tech, powerful magic, automated factories, and hundreds of custom items, all running on vanilla clients.
->
-> ⚠️ **This is an unofficial fork** of the original project, updated and maintained by **R2Ksanu** to bring full support for the latest Minecraft & Java releases.
-
-<br>
 
 ---
 
-<div align="center">
+## Sobre o projeto
 
-## 📦 SUPPORTED VERSIONS
+O **Slimefun** amplia a experiência de um servidor Minecraft sem exigir que os jogadores instalem mods no cliente. Ele adiciona centenas de itens, máquinas, receitas, sistemas de energia, automação, ferramentas e recursos de exploração.
 
-</div>
+Este repositório contém uma versão modificada e não oficial do SlimefunCore. O projeto usa a API do Paper **1.21.11**, é compilado para **Java 21** e inclui um gerenciador próprio para add-ons configurados.
 
-<table align="center">
-<tr>
-  <th align="center">🏷️ Build</th>
-  <th align="center">📌 Minecraft Version</th>
-  <th align="center">🚀 Loader</th>
-</tr>
-<tr>
-  <td align="center"><code> 2710 </code></td>
-  <td align="center"><code>1.21.x → 1.21.11</code></td>
-  <td align="center">⚡ Paper / Purpur</td>
-</tr>
-<tr>
-  <td align="center"><code> 2800 </code></td>
-  <td align="center"><code>26.1 → Up</code></td>
-  <td align="center">⚡ Paper / Purpur</td>
-</tr>
-</table>
+> Este fork não é uma distribuição oficial do Slimefun e não é afiliado aos mantenedores do projeto original.
 
-<br>
+## Versões e requisitos
 
----
-
-<div align="center">
-
-## 📊 STATUS UPDATE
-
-</div>
-
-<table align="center">
-<tr><td>⏪ <b>Original Base Version</b></td><td><code>1.19.4</code></td></tr>
-<tr><td>⏩ <b>Updated To</b></td><td><code>1.21.x → 1.21.11</code> &nbsp;&amp;&nbsp; <code>26.1+</code></td></tr>
-<tr><td>🧩 <b>Compatibility</b></td><td>✅ <b>100% Working</b></td></tr>
-<tr><td>🟢 <b>Overall Status</b></td><td>🧪 <b>Success</b> ✅</td></tr>
-<tr><td>🖥️ <b>Tested On</b></td><td><code>Paper / Purpur</code> — Java 21 / Java 25</td></tr>
-</table>
-
-<div align="center">
-
-> ⚠️ **This build is still under testing** and may contain bugs.
-> Feedback & bug reports are **highly appreciated** — always test on a backup server before deploying to production!
-
-</div>
-
-<br>
-
----
-
-<div align="center">
-
-## 🌟 WHAT IS SLIMEFUN?
-
-*Legendary in the Minecraft community since **2013**.*
-
-</div>
-
-<table align="center">
-<tr>
-<td align="center" width="25%">
-
-### ⚙️
-**Advanced Tech**
-<br><sub>Reactors, generators & electricity grids</sub>
-
-</td>
-<td align="center" width="25%">
-
-### 🔮
-**Magic & Altars**
-<br><sub>Runes, rituals & mystical crafting</sub>
-
-</td>
-<td align="center" width="25%">
-
-### 🏭
-**Full Automation**
-<br><sub>Auto-crafters & production lines</sub>
-
-</td>
-<td align="center" width="25%">
-
-### 🎒
-**500+ Items**
-<br><sub>Tools, armor, machines & more</sub>
-
-</td>
-</tr>
-</table>
-
-<div align="center">
-
-This unofficial build **keeps the spirit of the original alive**, while bringing full support for the absolute latest Minecraft versions.
-
-</div>
-
-<br>
-
----
-
-<div align="center">
-
-## 🚀 ADDONS & FUTURE UPDATES
-
-Community addons are being updated for **Minecraft 1.21.x+**, keeping the whole Slimefun ecosystem alive on modern **Purpur/Paper** servers.
-
-</div>
-
-### ✨ What's New in Addon Management
-
-| | |
+| Componente | Configuração do projeto |
 |:---|:---|
-| 🔄 | **Dynamic addon list** — shows cloud-managed & manually installed addons |
-| 📊 | **Status overview** — managed, loaded, and unmanaged addon counts |
-| 🧠 | **Smarter GitHub jar selection** — matches by addon name first |
-| 📖 | **Managed addon detection** — reads directly from the jar's `plugin.yml` |
-| 🛡️ | **Fallback flags** for remote sync — now fully respected |
+| Minecraft / API de servidor | **1.21.11** |
+| API de compilação | **Paper API 1.21.11** |
+| Versão mínima declarada no plugin.yml | **1.21** |
+| Java | **21** |
+| Build | **Maven** |
+| Licença | **GNU GPL v3.0** |
 
-<br>
+A versão da API configurada no `pom.xml` é Paper 1.21.11. O `plugin.yml` declara `api-version: '1.21'`; isso, por si só, não significa que todas as versões menores de Minecraft tenham sido testadas. Use Paper 1.21.11 como alvo de referência. Outros forks compatíveis com Paper, como Purpur, também devem ser validados no servidor em que serão utilizados.
 
-### ⌨️ Addon Commands
+## Recursos
+
+| Área | Exemplos |
+|:---|:---|
+| ⚙️ Tecnologia | Máquinas, geradores, reatores e sistemas de energia |
+| 🏭 Automação | Fabricação, processamento e transporte de itens |
+| 🔮 Magia | Altares, runas, talismãs e itens especiais |
+| 🎒 Equipamentos | Ferramentas, armaduras, mochilas e utilidades |
+| 🧭 Exploração | GPS, recursos geológicos e sistemas de exploração |
+
+## Gerenciador de add-ons
+
+O código inclui um gerenciador para add-ons cadastrados na configuração local/remota. A configuração distribuída em `src/main/resources/addonmanager.yml` habilita a sincronização com uma lista hospedada no GitHub e define URLs específicas por versão.
+
+Os comandos podem ser usados diretamente com `/addon` ou pelo subcomando `/sf addon`.
+
+| Comando | Função |
+|:---|:---|
+| `/addon list` | Lista os add-ons reconhecidos pelo gerenciador |
+| `/addon status` | Mostra o estado dos add-ons e da sincronização |
+| `/addon sync` | Solicita uma sincronização da configuração remota |
+| `/addon download <nome>` | Baixa um add-on configurado |
+| `/addon update <nome>` | Verifica e aplica uma atualização disponível |
+| `/addon enable <nome>` | Habilita um add-on gerenciado |
+| `/addon disable <nome>` | Desabilita um add-on gerenciado |
+| `/addon remove <nome>` | Remove um add-on gerenciado |
+
+As alterações de habilitação e desabilitação podem exigir reinicialização do servidor. O gerenciador administra os arquivos e as entradas configuradas; ele não modifica automaticamente o código de add-ons de terceiros para corrigir incompatibilidades.
+
+### Permissões do gerenciador
+
+- `addon.admin`: administração completa.
+- `addon.update`: sincronização, download e atualização.
+- `addon.manage`: habilitar, desabilitar e remover add-ons.
+
+## Compatibilidade com add-ons antigos
+
+É importante distinguir duas coisas:
+
+1. **Versão do Minecraft:** este projeto está configurado para compilar contra a Paper API 1.21.11.
+2. **API do Slimefun:** add-ons antigos podem depender de classes, construtores, métodos e comportamentos que existiam em versões anteriores do Slimefun.
+
+Na versão que está atualmente na branch `main`, `SlimefunItemStack` é implementado como uma classe que mantém um `ItemStack` interno; ela **não herda diretamente de** `org.bukkit.inventory.ItemStack`. Por isso, um add-on legado que espera passar um `SlimefunItemStack` diretamente para um método Bukkit/Paper que recebe `ItemStack` pode não ser compatível.
+
+O [Pull Request #1](https://github.com/davitremea1-ops/Slimefun4.5Core/pull/1) contém um trabalho separado para restaurar contratos da API legada e adicionar testes de compatibilidade. Essas alterações ainda não fazem parte desta branch principal. Não considere a compatibilidade universal de add-ons antigos garantida até que o PR seja integrado e os complementos utilizados sejam testados individualmente.
+
+Add-ons que dependem de NMS, bibliotecas próprias, eventos internos ou detalhes não documentados podem precisar de correções específicas mesmo depois da restauração da API pública.
+
+## Idiomas
+
+Os arquivos de idioma ficam em `src/main/resources/languages/`. O repositório inclui uma pasta `pt-BR` com arquivos de mensagens, categorias, receitas, pesquisas e recursos.
+
+**Atenção:** a configuração atual de `main` usa inglês (`options.language: en`) como idioma padrão. Para selecionar português do Brasil, altere a opção `language` no arquivo `config.yml` do Slimefun para `pt-BR` e reinicie o servidor. A cobertura e a revisão de cada texto traduzido podem variar.
+
+## Compilar
+
+### Requisitos
+
+- Git;
+- Java Development Kit (JDK) **21**;
+- Maven.
+
+Confira as versões instaladas:
 
 ```bash
-/sf addon list                 # List all addons (managed + installed)
-/sf addon status                # Show addon counts and sync state
-/sf addon sync                  # Manually trigger a cloud config sync
-/sf addon enable <name>         # Enable a managed addon
-/sf addon disable <name>        # Disable a managed addon
-/sf addon update <name>         # Update a specific addon
-/sf addon download <name>       # Download a managed addon
-/sf addon remove <name>         # Remove a managed addon
+java -version
+mvn -version
 ```
 
-<br>
+Clone o repositório e execute o build:
 
-<div align="center">
+```bash
+git clone https://github.com/davitremea1-ops/Slimefun4.5Core.git
+cd Slimefun4.5Core
+mvn clean package
+```
 
-| 🧩 Addon Type | 📈 Progress | 📝 Notes |
-|:---|:---:|:---|
-| 🌍 **Community Addons** | `██████░░░░░░░░░░░░░░` 30% | Updates in progress for `1.21.x+` |
-| ⚙️ **Main Slimefun Core** | `████████████████████` 100% | ✅ Fully working on `Purpur/Paper 1.21.x+` |
+O Maven executa as etapas de compilação, testes configurados e empacotamento. O artefato principal é criado em `target/` com o nome:
 
-</div>
+```text
+target/SlimefunCore4-<NUMERO_DO_BUILD>.jar
+```
 
-<br>
+Também é gerado um JAR de fontes com o sufixo `-sources.jar`.
 
----
+**Observação sobre Linux:** o `pom.xml` que está atualmente em `main` chama o executável `powershell` para atualizar o número do build. Em ambientes Linux, esse comando precisa estar instalado e disponível com esse nome. O PR de compatibilidade inclui uma implementação específica para Unix, mas ela ainda não foi incorporada a `main`.
 
-<div align="center">
+## Instalação
 
-## 📸 SCREENSHOTS
+1. Faça backup do servidor e dos dados do Slimefun.
+2. Pare o servidor Paper 1.21.11.
+3. Coloque o JAR compilado na pasta `plugins/`.
+4. Instale os add-ons e as dependências exigidas por cada projeto.
+5. Inicie o servidor e confira o console em busca de erros.
+6. Teste os itens, receitas, máquinas e integrações antes de liberar o servidor aos jogadores.
 
-<sub><i>Reused from the original project — showcasing the absolute power of Slimefun</i></sub>
+Não substitua o JAR de uma instalação em produção sem backup. Evite instalar cópias duplicadas de um mesmo add-on.
 
-<br><br>
+## Estado do desenvolvimento
 
-<img src="https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase1.png" width="270" style="border-radius:12px;margin:6px;box-shadow:0 6px 18px rgba(0,0,0,0.3)">
-<img src="https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase6.png" width="270" style="border-radius:12px;margin:6px;box-shadow:0 6px 18px rgba(0,0,0,0.3)">
-<img src="https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase5.png" width="270" style="border-radius:12px;margin:6px;box-shadow:0 6px 18px rgba(0,0,0,0.3)">
-
-<br>
-
-⚡ **Reactors & Electricity** &nbsp;&nbsp;|&nbsp;&nbsp; 🏭 **Awesome Factories** &nbsp;&nbsp;|&nbsp;&nbsp; 🔮 **Magic & Altars**
-
-</div>
-
-<br>
-
----
-
-<div align="center">
-
-## 🌐 COMMUNITY & SUPPORT
-
-Join the community to get support, report bugs, follow updates, and test upcoming builds!
-
-<br>
-
-[![Discord](https://img.shields.io/badge/Join_our-Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discord.gg/hJwXe3tw4)
-[![Issues](https://img.shields.io/badge/Report_a-Bug-red?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rutwok-labs/SlimefunCore-V.4.0/issues)
-[![Wiki](https://img.shields.io/badge/Read_the-Wiki-blue?style=for-the-badge&logo=bookstack&logoColor=white)](https://github.com/Slimefun/Slimefun4/wiki)
-[![Original](https://img.shields.io/badge/Original-Slimefun4-black?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Slimefun/Slimefun4)
-
-</div>
-
-<br>
-
----
-
-<div align="center">
-
-## 🤝🏻 CREDITS & DISCLAIMER
-
-**This is an unofficial fork and is not affiliated with the original Slimefun developers or team.**
-All credit goes to the original **Slimefun Team**.
-
-<br>
-
-| Role | Credit |
+| Área | Situação |
 |:---|:---|
-| 👑 **Original Project Creator** | [**TheBusyBiscuit**](https://github.com/TheBusyBiscuit) |
-| 👥 **Original Project Team** | Slimefun Team |
-| 🛠️ **Modified & Updated By** | **R2Ksanu** |
-| 📸 **Screenshots** | Courtesy of the original Slimefun community |
+| Alvo Paper API 1.21.11 | Configurado no Maven |
+| Compilação para Java 21 | Configurada no Maven |
+| Gerenciador de add-ons | Implementado no código |
+| Arquivos de idioma pt-BR | Presentes no repositório |
+| Compatibilidade completa com add-ons legados | Em desenvolvimento no PR #1 |
+| Build e testes no GitHub Actions | Ainda sem execução registrada nesta revisão |
+| Testes com add-ons de terceiros em servidor real | Necessários |
 
-<br>
+**Não interprete a configuração do Maven como prova de que o JAR já foi validado em um servidor real.** Faça backup e teste em ambiente separado antes de utilizar em produção.
 
-This project follows the **GNU GPLv3 License**.
-You are free to modify and share it — **but you must give proper credit** and keep the same license.
-See the [LICENSE](https://github.com/Slimefun/Slimefun4/blob/master/LICENSE) for full details.
+## Capturas de tela
 
-</div>
-
-<br>
-
----
+As imagens abaixo são do projeto e da comunidade Slimefun original.
 
 <div align="center">
 
-### 💚 Thank you for using Slimefun 4.0v-UNOFFICIAL! 💚
+<img src="https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase1.png" width="270" alt="Demonstração do Slimefun">
+<img src="https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase6.png" width="270" alt="Máquinas do Slimefun">
+<img src="https://raw.githubusercontent.com/Slimefun/Slimefun-Wiki/master/images/showcase5.png" width="270" alt="Itens do Slimefun">
 
-*Enjoy your modpack-like experience on the latest Minecraft version.*
-**Made with ❤️ for the Minecraft community.**
+</div>
 
-<br>
+## Créditos e licença
 
-![Visitors](https://img.shields.io/badge/Powered_by-Slimefun_Community-62b47a?style=for-the-badge&logo=minecraft&logoColor=white)
+Este fork utiliza trabalho do projeto Slimefun e de seus colaboradores.
+
+- **Projeto original:** [Slimefun 4](https://github.com/Slimefun/Slimefun4)
+- **Criador do projeto original:** [TheBusyBiscuit](https://github.com/TheBusyBiscuit)
+- **Base relacionada:** [SlimeCore-MC/Slimefun4Core](https://github.com/SlimeCore-MC/Slimefun4Core)
+- **Este repositório:** [davitremea1-ops/Slimefun4.5Core](https://github.com/davitremea1-ops/Slimefun4.5Core)
+
+O código está sob a **GNU General Public License v3.0 (GPLv3)**. Modificações e redistribuições devem respeitar os termos da licença e manter os avisos de copyright aplicáveis. Consulte o arquivo [LICENSE](LICENSE).
+
+<div align="center">
+
+### 💚 Obrigado por conferir o SlimefunCore!
+
+*Uma experiência no estilo modpack dentro do Minecraft vanilla.*
 
 </div>
