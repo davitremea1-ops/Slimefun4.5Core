@@ -23,6 +23,18 @@ class TestMinecraftVersion {
     }
 
     @Test
+    @DisplayName("Test if major-only Minecraft version checks match supported version families")
+    void testMatchesMajorWithoutPatch() {
+        Assertions.assertTrue(MinecraftVersion.MINECRAFT_1_19.isMinecraftVersion(19));
+        Assertions.assertTrue(MinecraftVersion.MINECRAFT_1_20.isMinecraftVersion(20));
+        Assertions.assertTrue(MinecraftVersion.MINECRAFT_1_20_5.isMinecraftVersion(20));
+        Assertions.assertTrue(MinecraftVersion.MINECRAFT_1_21.isMinecraftVersion(21));
+
+        Assertions.assertFalse(MinecraftVersion.MINECRAFT_1_21.isMinecraftVersion(20));
+        Assertions.assertFalse(MinecraftVersion.UNKNOWN.isMinecraftVersion(21));
+    }
+
+    @Test
     @DisplayName("Test if Minecraft versions match minor versions")
     void testMatchesMinor() {
         Assertions.assertTrue(MinecraftVersion.MINECRAFT_1_16.isMinecraftVersion(16, 1));
