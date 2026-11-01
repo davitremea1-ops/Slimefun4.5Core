@@ -230,7 +230,7 @@ public abstract class AbstractAutoCrafter extends SlimefunItem implements Energy
 
     /**
      * This method sets the selected {@link AbstractRecipe} for the given {@link Block}.
-     * The recipe will be stored using the {@link PersistentDataAPI}.
+     * The recipe will be stored using the {@link SF4DataAPI}.
      *
      * @param b
      *            The {@link Block} to store the data on
