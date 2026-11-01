@@ -1,14 +1,13 @@
 <div align="center">
 
-# ⛏️ SlimefunCore 4.5
+# ⛏️ SlimefunCore 4.0
 
-### Fork não oficial do Slimefun 4 — foco em compatibilidade de add-ons
+### Fork não oficial do Slimefun 4 — Paper 1.21.11
 
 ![Minecraft](https://img.shields.io/badge/Minecraft-1.21.11-62b47a?style=for-the-badge&logo=minecraft&logoColor=white)
-![Servidor](https://img.shields.io/badge/Servidor-Paper%20%7C%20Purpur-blue?style=for-the-badge)
+![Paper API](https://img.shields.io/badge/Paper%20API-1.21.11-blue?style=for-the-badge)
 ![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Idioma](https://img.shields.io/badge/Idioma-pt--BR-green?style=for-the-badge)
-![Licença](https://img.shields.io/badge/Licen%C3%A7a-GPL--3.0-orange?style=for-the-badge)
+![Licença](https://img.shields.io/badge/Licen%C3%A7a-GPL--3.0-orange?style=for-the-badge&logo=gnu&logoColor=white)
 
 <br>
 
@@ -21,8 +20,21 @@
 **[Relatar um problema](https://github.com/davitremea1-ops/Slimefun4.5Core/issues)** ·
 **[Wiki original](https://github.com/Slimefun/Slimefun4/wiki)** ·
 **[Discord](https://discord.gg/hJwXe3tw4)**
+**[Repositório](https://github.com/davitremea1-ops/Slimefun4.5Core)** ·
+**[Pull Request de compatibilidade](https://github.com/davitremea1-ops/Slimefun4.5Core/pull/1)** ·
+**[Relatar um problema](https://github.com/davitremea1-ops/Slimefun4.5Core/issues)** ·
+**[Wiki original](https://github.com/Slimefun/Slimefun4/wiki)** ·
+**[Projeto original](https://github.com/Slimefun/Slimefun4)**
 
 </div>
+
+---
+
+## Sobre o projeto
+
+O **Slimefun** amplia a experiência de um servidor Minecraft sem exigir que os jogadores instalem mods no cliente. Ele adiciona centenas de itens, máquinas, receitas, sistemas de energia, automação, ferramentas e recursos de exploração.
+
+Este repositório contém uma versão modificada e não oficial do SlimefunCore. O projeto usa a API do Paper **1.21.11**, é compilado para **Java 21** e inclui um gerenciador próprio para add-ons configurados.
 
 ---
 
