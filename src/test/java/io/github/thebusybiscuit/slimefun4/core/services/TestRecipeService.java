@@ -46,7 +46,8 @@ class TestRecipeService {
         MinecraftRecipeService service = new MinecraftRecipeService(plugin);
 
         NamespacedKey key = new NamespacedKey(plugin, "furnace_recipe_test");
-        ItemStack result = new ItemStack(Material.EMERALD_BLOCK);
+        // Use an output without a vanilla recipe so this test isolates its own recipe.
+        ItemStack result = new ItemStack(Material.BLAZE_ROD);
         FurnaceRecipe recipe = new FurnaceRecipe(key, result, new MaterialChoice(Material.DIAMOND), 1, 2);
         server.addRecipe(recipe);
 
