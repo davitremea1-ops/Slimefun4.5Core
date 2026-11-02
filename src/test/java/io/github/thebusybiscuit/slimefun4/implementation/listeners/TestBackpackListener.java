@@ -138,9 +138,14 @@ class TestBackpackListener {
         Player player = server.addPlayer();
         Inventory inv = openMockBackpack(player, id, 9).getInventory();
 
+        // The callback opens the backpack through Slimefun.runSync(). MockBukkit does not
+        // advance the scheduler automatically here, so explicitly open the backing inventory.
+        player.openInventory(inv);
+
         int slot = 7;
         inv.setItem(slot, item);
         InventoryView view = InventoryViewWrapper.wrap(player.getOpenInventory());
+        Assertions.assertEquals(inv, view.getTopInventory(), "The event must target the opened backpack inventory.");
         InventoryClickEvent event = new InventoryClickEvent(view, SlotType.CONTAINER, slot, ClickType.LEFT, InventoryAction.PICKUP_ONE);
         listener.onClick(event);
         return !event.isCancelled();
