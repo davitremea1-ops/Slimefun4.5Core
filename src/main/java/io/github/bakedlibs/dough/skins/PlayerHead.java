@@ -71,7 +71,14 @@ public final class PlayerHead {
                     "Cannot update a head texture. Expected a Player Head, received: " + material);
         }
 
-        if (MinecraftVersion.get().isAtLeast(MinecraftVersion.parse("1.20"))) {
+        final boolean usePaperProfile;
+        try {
+            usePaperProfile = MinecraftVersion.get().isAtLeast(MinecraftVersion.parse("1.20"));
+        } catch (UnknownServerVersionException error) {
+            throw new IllegalStateException("Could not detect the server version while updating a player head", error);
+        }
+
+        if (usePaperProfile) {
             BlockState state = block.getState();
             if (!(state instanceof Skull skull)) {
                 throw new IllegalStateException("The target block did not provide Skull state");
