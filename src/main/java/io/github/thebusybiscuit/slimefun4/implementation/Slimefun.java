@@ -527,7 +527,10 @@ public class Slimefun extends JavaPlugin implements SlimefunAddon {
         // Bukkit cancels this plugin's scheduler tasks at the start of onDisable().
         // Use a dedicated daemon thread because the scheduler must not be used once
         // plugin shutdown has started.
-        Thread backupThread = new Thread(worldBackupService, "Slimefun-World-Backup");
+        Thread backupThread = new Thread(() -> {
+            worldBackupService.run();
+            getLogger().info("World backup worker finished during shutdown.");
+        }, "Slimefun-World-Backup");
         backupThread.setDaemon(true);
         backupThread.start();
 
