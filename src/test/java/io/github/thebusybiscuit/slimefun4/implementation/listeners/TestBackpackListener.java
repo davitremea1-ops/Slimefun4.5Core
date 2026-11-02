@@ -147,6 +147,7 @@ class TestBackpackListener {
         InventoryView view = InventoryViewWrapper.wrap(player.getOpenInventory());
         Assertions.assertEquals(inv, view.getTopInventory(), "The event must target the opened backpack inventory.");
         InventoryClickEvent event = new InventoryClickEvent(view, SlotType.CONTAINER, slot, ClickType.LEFT, InventoryAction.PICKUP_ONE);
+        Assertions.assertEquals(item, event.getCurrentItem(), "MockBukkit must expose the item in the clicked backpack slot.");
         listener.onClick(event);
         return !event.isCancelled();
     }
@@ -162,6 +163,7 @@ class TestBackpackListener {
     @DisplayName("Test backpacks rejecting certain materials")
     @EnumSource(value = Material.class, names = { "SHULKER_BOX", "RED_SHULKER_BOX", "BLUE_SHULKER_BOX", "BLACK_SHULKER_BOX" })
     void areShulkerBoxesAllowed(Material type) throws InterruptedException {
+        Assertions.assertTrue(SlimefunTag.SHULKER_BOXES.isTagged(type), "The shulker-box tag must include " + type);
         Assertions.assertFalse(isAllowed("BACKPACK_ALLOWANCE_" + type.name(), new ItemStack(type)));
     }
 
