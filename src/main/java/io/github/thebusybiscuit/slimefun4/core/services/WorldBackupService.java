@@ -157,7 +157,7 @@ public class WorldBackupService implements Runnable {
                     return FileVisitResult.CONTINUE;
                 }
 
-                Path relative = worldFolder.getParent() == null ? worldFolder.relativize(file) : worldFolder.getParent().relativize(file);
+                Path relative = zipEntryPath(worldFolder, file);
                 ZipEntry entry = new ZipEntry(relative.toString().replace('\\', '/'));
                 output.putNextEntry(entry);
                 Files.copy(file, output);
@@ -165,6 +165,18 @@ public class WorldBackupService implements Runnable {
                 return FileVisitResult.CONTINUE;
             }
         });
+    }
+
+    static @Nonnull Path zipEntryPath(@Nonnull Path worldFolder, @Nonnull Path file) {
+        Path worldName = worldFolder.getFileName();
+        if (worldName == null) {
+            throw new IllegalArgumentException("World folder must have a name.");
+        }
+
+        // Keep each dimension under its own top-level folder in the archive.
+        // Without this prefix, files with the same name in different worlds
+        // (for example paper-world.yml) collide as duplicate ZIP entries.
+        return worldName.resolve(worldFolder.relativize(file));
     }
 
     private boolean shouldSkip(@Nonnull Path file) {
