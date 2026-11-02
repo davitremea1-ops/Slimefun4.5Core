@@ -140,7 +140,8 @@ class TestBackpackListener {
 
         int slot = 7;
         inv.setItem(slot, item);
-        InventoryClickEvent event = new InventoryClickEvent(player.getOpenInventory(), SlotType.CONTAINER, slot, ClickType.LEFT, InventoryAction.PICKUP_ONE);
+        InventoryView view = InventoryViewWrapper.wrap(player.getOpenInventory());
+        InventoryClickEvent event = new InventoryClickEvent(view, SlotType.CONTAINER, slot, ClickType.LEFT, InventoryAction.PICKUP_ONE);
         listener.onClick(event);
         return !event.isCancelled();
     }
