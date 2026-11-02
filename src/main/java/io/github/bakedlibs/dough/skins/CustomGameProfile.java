@@ -86,6 +86,16 @@ public final class CustomGameProfile {
     }
 
     @Nonnull
+    UUID getId() {
+        return resolveId(this.handle);
+    }
+
+    @Nonnull
+    URL getSkinUrl() {
+        return this.skinUrl;
+    }
+
+    @Nonnull
     GameProfile asGameProfile() {
         return this.handle;
     }
