@@ -82,13 +82,19 @@ class TestBackpackListener {
         PlayerProfile profile = TestUtilities.awaitProfile(player);
 
         PlayerBackpack backpack = profile.createBackpack(size);
-        listener.setBackpackId(player, item.item(), 2, backpack.getId());
+        // Keep one physical stack instance: item.item() returns a copy, so calling it
+        // twice would make the listener generate and open a different backpack than the
+        // PlayerBackpack returned to the test.
+        ItemStack backpackItem = item.item();
+        listener.setBackpackId(player, backpackItem, 2, backpack.getId());
 
         ItemGroup itemGroup = new ItemGroup(new NamespacedKey(plugin, "test_backpacks"), CustomItemStack.create(Material.CHEST, "&4Test Backpacks"));
         SlimefunBackpack slimefunBackpack = new SlimefunBackpack(size, itemGroup, item, RecipeType.NULL, new ItemStack[9]);
         slimefunBackpack.register(plugin);
 
-        listener.openBackpack(player, item.item(), slimefunBackpack);
+        listener.openBackpack(player, backpackItem, slimefunBackpack);
+        Assertions.assertEquals(backpack.getInventory(), player.getOpenInventory().getTopInventory(),
+                "The listener must open the same PlayerBackpack returned to the test.");
         return backpack;
     }
 
@@ -137,10 +143,6 @@ class TestBackpackListener {
     private boolean isAllowed(String id, ItemStack item) throws InterruptedException {
         Player player = server.addPlayer();
         Inventory inv = openMockBackpack(player, id, 9).getInventory();
-
-        // The callback opens the backpack through Slimefun.runSync(). MockBukkit does not
-        // advance the scheduler automatically here, so explicitly open the backing inventory.
-        player.openInventory(inv);
 
         int slot = 7;
         inv.setItem(slot, item);
