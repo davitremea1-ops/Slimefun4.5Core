@@ -251,7 +251,7 @@ class TestLegacyBackend {
 
         // Create a player file which we can load
         UUID uuid = UUID.randomUUID();
-        File playerFile = new File("data-storage/Slimefun/Players/" + uuid + ".yml");
+        File waypointFile = new File("data-storage/Slimefun/waypoints/" + uuid + ".yml");
 
         OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
         PlayerProfile profile = TestUtilities.awaitProfile(player);
@@ -268,7 +268,7 @@ class TestLegacyBackend {
         storage.savePlayerData(uuid, profile.getPlayerData());
 
         // Assert the file exists and data is correct
-        Assertions.assertTrue(playerFile.exists());
+        Assertions.assertTrue(waypointFile.exists());
         PlayerData assertion = storage.loadPlayerData(uuid);
         Assertions.assertEquals(1, assertion.getWaypoints().size());
     
@@ -341,7 +341,7 @@ class TestLegacyBackend {
 
         // Create a player file which we can load
         UUID uuid = UUID.randomUUID();
-        File playerFile = new File("data-storage/Slimefun/Players/" + uuid + ".yml");
+        File waypointFile = new File("data-storage/Slimefun/waypoints/" + uuid + ".yml");
 
         OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
         PlayerProfile profile = TestUtilities.awaitProfile(player);
@@ -366,7 +366,7 @@ class TestLegacyBackend {
         storage.savePlayerData(uuid, profile.getPlayerData());
 
         // Assert the file exists and data is correct
-        Assertions.assertTrue(playerFile.exists());
+        Assertions.assertTrue(waypointFile.exists());
         PlayerData assertion = storage.loadPlayerData(uuid);
         Assertions.assertEquals(2, assertion.getWaypoints().size());
 
@@ -377,7 +377,7 @@ class TestLegacyBackend {
         storage.savePlayerData(uuid, profile.getPlayerData());
 
         // Assert the file exists and data is correct
-        Assertions.assertTrue(playerFile.exists());
+        Assertions.assertTrue(waypointFile.exists());
         assertion = storage.loadPlayerData(uuid);
         Assertions.assertEquals(1, assertion.getWaypoints().size());
     }
