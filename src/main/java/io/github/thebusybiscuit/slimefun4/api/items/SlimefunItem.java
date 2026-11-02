@@ -152,7 +152,7 @@ public class SlimefunItem implements Placeable {
         Validate.notNull(recipeType, "'recipeType' is not allowed to be null!");
 
         this.itemGroup = itemGroup;
-        this.itemStackTemplate = item.item();
+        this.itemStackTemplate = item;
         this.id = item.getItemId();
         this.recipeType = recipeType;
         this.recipe = recipe;
@@ -499,6 +499,11 @@ public class SlimefunItem implements Placeable {
                 this.itemHandlers.clear();
             }
 
+            // Lock the SlimefunItemStack from accidental mutations, as in the legacy API.
+            if (itemStackTemplate instanceof SlimefunItemStack stack && isItemStackImmutable()) {
+                stack.lock();
+            }
+
             postRegister();
 
             // handle runtime-registrations / auto-loading
@@ -580,6 +585,17 @@ public class SlimefunItem implements Placeable {
      * @param addon
      *            The {@link SlimefunAddon} trying to register this {@link SlimefunItem}
      */
+    /**
+     * Returns whether the original {@link SlimefunItemStack} of this item is immutable.
+     *
+     * <p>Kept as a protected extension point for existing Slimefun add-ons.</p>
+     *
+     * @return whether the original item stack should be locked after registration
+     */
+    protected boolean isItemStackImmutable() {
+        return true;
+    }
+
     private void checkDependencies(@Nonnull SlimefunAddon addon) {
         if (!addon.hasDependency("Slimefun")) {
             throw new MissingDependencyException(addon, "Slimefun");

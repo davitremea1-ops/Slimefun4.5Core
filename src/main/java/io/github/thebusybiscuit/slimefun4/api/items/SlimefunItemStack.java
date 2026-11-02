@@ -40,6 +40,7 @@ import io.github.thebusybiscuit.slimefun4.libraries.bridge.SF4Patterns;
 import io.github.bakedlibs.dough.items.ItemMetaSnapshot;
 import io.github.thebusybiscuit.slimefun4.api.MinecraftVersion;
 import io.github.thebusybiscuit.slimefun4.api.exceptions.PrematureCodeException;
+import io.github.thebusybiscuit.slimefun4.api.exceptions.WrongItemStackException;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.utils.HeadTexture;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
@@ -53,16 +54,16 @@ import io.github.thebusybiscuit.slimefun4.utils.compatibility.VersionedItemFlag;
  * @author Walshy
  *
  */
-public class SlimefunItemStack {
-    private ItemStack delegate;
+public class SlimefunItemStack extends ItemStack {
 
     private String id;
     private ItemMetaSnapshot itemMetaSnapshot;
+    private boolean locked = false;
 
     private String texture = null;
 
     public SlimefunItemStack(@Nonnull String id, @Nonnull ItemStack item) {
-        delegate = new ItemStack(item);
+        super(item);
 
         Validate.notNull(id, "The Item id must never be null!");
         Validate.isTrue(id.equals(id.toUpperCase(Locale.ROOT)), "Slimefun Item Ids must be uppercase! (e.g. 'MY_ITEM_ID')");
@@ -73,7 +74,7 @@ public class SlimefunItemStack {
 
         this.id = id;
 
-        ItemMeta meta = delegate.getItemMeta();
+        ItemMeta meta = super.getItemMeta();
 
         Slimefun.getItemDataService().setItemData(meta, id);
         Slimefun.getItemTextureService().setTexture(meta, id);
@@ -84,7 +85,7 @@ public class SlimefunItemStack {
     public SlimefunItemStack(@Nonnull String id, @Nonnull ItemStack item, @Nonnull Consumer<ItemMeta> consumer) {
         this(id, item);
 
-        ItemMeta im = delegate.getItemMeta();
+        ItemMeta im = super.getItemMeta();
         consumer.accept(im);
         setItemMeta(im);
     }
@@ -251,18 +252,38 @@ public class SlimefunItemStack {
         return itemMetaSnapshot;
     }
 
+    @Override
     public boolean setItemMeta(ItemMeta meta) {
+        validate();
         itemMetaSnapshot = new ItemMetaSnapshot(meta);
 
-        return delegate.setItemMeta(meta);
+        return super.setItemMeta(meta);
     }
 
+    @Override
     public void setType(Material type) {
-        delegate.setType(type);
+        validate();
+        super.setType(type);
     }
 
+    @Override
     public void setAmount(int amount) {
-        delegate.setAmount(amount);
+        validate();
+        super.setAmount(amount);
+    }
+
+    /**
+     * Prevents mutation of this item stack's type, amount and metadata.
+     * This is used by Slimefun when an item's original template is registered.
+     */
+    public void lock() {
+        locked = true;
+    }
+
+    private void validate() {
+        if (locked) {
+            throw new WrongItemStackException(id + " is not mutable.");
+        }
     }
 
     public @Nonnull Optional<String> getSkullTexture() {
@@ -302,12 +323,12 @@ public class SlimefunItemStack {
 
     @Override
     public @Nonnull SlimefunItemStack clone() {
-        return new SlimefunItemStack(id, delegate.clone());
+        return new SlimefunItemStack(id, super.clone());
     }
 
     @Override
     public String toString() {
-        return "SlimefunItemStack (" + id + (delegate.getAmount() > 1 ? (" x " + delegate.getAmount()) : "") + ')';
+        return "SlimefunItemStack (" + id + (super.getAmount() > 1 ? (" x " + super.getAmount()) : "") + ')';
     }
 
     /**
@@ -332,242 +353,243 @@ public class SlimefunItemStack {
      * @return underlying ItemStack used
      */
     public @Nonnull ItemStack item() {
-        return delegate.clone();
+        // Return a plain Bukkit ItemStack copy, not another locked SlimefunItemStack.
+        return new ItemStack(this);
     }
 
     public Material getType() {
-        return this.delegate.getType();
+        return super.getType();
     }
 
     public ItemStack withType(Material type) {
-        return this.delegate.withType(type);
+        return super.withType(type);
     }
 
     public int getAmount() {
-        return this.delegate.getAmount();
+        return super.getAmount();
     }
 
     /** @deprecated */
     @Deprecated
     public MaterialData getData() {
-        return this.delegate.getData();
+        return super.getData();
     }
 
     /** @deprecated */
     @Deprecated
     public void setData(MaterialData data) {
-        this.delegate.setData(data);
+        super.setData(data);
     }
 
     /** @deprecated */
     @Deprecated
     public void setDurability(short durability) {
-        this.delegate.setDurability(durability);
+        super.setDurability(durability);
     }
 
     /** @deprecated */
     @Deprecated
     public short getDurability() {
-        return this.delegate.getDurability();
+        return super.getDurability();
     }
 
     public int getMaxStackSize() {
-        return this.delegate.getMaxStackSize();
+        return super.getMaxStackSize();
     }
 
     public boolean isSimilar(ItemStack stack) {
-        return this.delegate.isSimilar(stack);
+        return super.isSimilar(stack);
     }
 
     public boolean containsEnchantment(Enchantment ench) {
-        return this.delegate.containsEnchantment(ench);
+        return super.containsEnchantment(ench);
     }
 
     public int getEnchantmentLevel(Enchantment ench) {
-        return this.delegate.getEnchantmentLevel(ench);
+        return super.getEnchantmentLevel(ench);
     }
 
     public Map<Enchantment, Integer> getEnchantments() {
-        return this.delegate.getEnchantments();
+        return super.getEnchantments();
     }
 
     public void addEnchantments(Map<Enchantment, Integer> enchantments) {
-        this.delegate.addEnchantments(enchantments);
+        super.addEnchantments(enchantments);
     }
 
     public void addEnchantment(Enchantment ench, int level) {
-        this.delegate.addEnchantment(ench, level);
+        super.addEnchantment(ench, level);
     }
 
     public void addUnsafeEnchantments(Map<Enchantment, Integer> enchantments) {
-        this.delegate.addUnsafeEnchantments(enchantments);
+        super.addUnsafeEnchantments(enchantments);
     }
 
     public void addUnsafeEnchantment(Enchantment ench, int level) {
-        this.delegate.addUnsafeEnchantment(ench, level);
+        super.addUnsafeEnchantment(ench, level);
     }
 
     public int removeEnchantment(Enchantment ench) {
-        return this.delegate.removeEnchantment(ench);
+        return super.removeEnchantment(ench);
     }
 
     public void removeEnchantments() {
-        this.delegate.removeEnchantments();
+        super.removeEnchantments();
     }
 
     public Map<String, Object> serialize() {
-        return this.delegate.serialize();
+        return super.serialize();
     }
 
     public boolean editMeta(Consumer<? super ItemMeta> consumer) {
-        return this.delegate.editMeta(consumer);
+        return super.editMeta(consumer);
     }
 
     public <M extends ItemMeta> boolean editMeta(Class<M> metaClass, Consumer<? super M> consumer) {
-        return this.delegate.editMeta(metaClass, consumer);
+        return super.editMeta(metaClass, consumer);
     }
 
     public ItemMeta getItemMeta() {
-        return this.delegate.getItemMeta();
+        return super.getItemMeta();
     }
 
     public boolean hasItemMeta() {
-        return this.delegate.hasItemMeta();
+        return super.hasItemMeta();
     }
 
     /** @deprecated */
     @Deprecated
     public String getTranslationKey() {
-        return this.delegate.getTranslationKey();
+        return super.getTranslationKey();
     }
 
     public ItemStack enchantWithLevels(int levels, boolean allowTreasure, Random random) {
-        return this.delegate.enchantWithLevels(levels, allowTreasure, random);
+        return super.enchantWithLevels(levels, allowTreasure, random);
     }
 
     public ItemStack enchantWithLevels(int levels, RegistryKeySet<Enchantment> keySet, Random random) {
-        return this.delegate.enchantWithLevels(levels, keySet, random);
+        return super.enchantWithLevels(levels, keySet, random);
     }
 
     public HoverEvent<HoverEvent.ShowItem> asHoverEvent(UnaryOperator<HoverEvent.ShowItem> op) {
-        return this.delegate.asHoverEvent(op);
+        return super.asHoverEvent(op);
     }
 
     public Component displayName() {
-        return this.delegate.displayName();
+        return super.displayName();
     }
 
     public ItemStack ensureServerConversions() {
-        return this.delegate.ensureServerConversions();
+        return super.ensureServerConversions();
     }
 
     public byte[] serializeAsBytes() {
-        return this.delegate.serializeAsBytes();
+        return super.serializeAsBytes();
     }
 
     /** @deprecated */
     public String getI18NDisplayName() {
-        return this.delegate.getI18NDisplayName();
+        return super.getI18NDisplayName();
     }
 
     /** @deprecated */
     public int getMaxItemUseDuration() {
-        return this.delegate.getMaxItemUseDuration();
+        return super.getMaxItemUseDuration();
     }
 
     public int getMaxItemUseDuration(LivingEntity entity) {
-        return this.delegate.getMaxItemUseDuration(entity);
+        return super.getMaxItemUseDuration(entity);
     }
 
     public ItemStack asOne() {
-        return this.delegate.asOne();
+        return super.asOne();
     }
 
     public ItemStack asQuantity(int qty) {
-        return this.delegate.asQuantity(qty);
+        return super.asQuantity(qty);
     }
 
     public ItemStack add() {
-        return this.delegate.add();
+        return super.add();
     }
 
     public ItemStack add(int qty) {
-        return this.delegate.add(qty);
+        return super.add(qty);
     }
 
     public ItemStack subtract() {
-        return this.delegate.subtract();
+        return super.subtract();
     }
 
     public ItemStack subtract(int qty) {
-        return this.delegate.subtract(qty);
+        return super.subtract(qty);
     }
 
     @Deprecated
     public List<String> getLore() {
-        return this.delegate.getLore();
+        return super.getLore();
     }
 
     public List<Component> lore() {
-        return this.delegate.lore();
+        return super.lore();
     }
 
     @Deprecated
     public void setLore(List<String> lore) {
-        this.delegate.setLore(lore);
+        super.setLore(lore);
     }
 
     public void lore(List<? extends Component> lore) {
-        this.delegate.lore(lore);
+        super.lore(lore);
     }
 
     public void addItemFlags(ItemFlag... itemFlags) {
-        this.delegate.addItemFlags(itemFlags);
+        super.addItemFlags(itemFlags);
     }
 
     public void removeItemFlags(ItemFlag... itemFlags) {
-        this.delegate.removeItemFlags(itemFlags);
+        super.removeItemFlags(itemFlags);
     }
 
     public Set<ItemFlag> getItemFlags() {
-        return this.delegate.getItemFlags();
+        return super.getItemFlags();
     }
 
     public boolean hasItemFlag(ItemFlag flag) {
-        return this.delegate.hasItemFlag(flag);
+        return super.hasItemFlag(flag);
     }
 
     public String translationKey() {
-        return this.delegate.translationKey();
+        return super.translationKey();
     }
 
     /** @deprecated */
     @Deprecated
     public ItemRarity getRarity() {
-        return this.delegate.getRarity();
+        return super.getRarity();
     }
 
     public boolean isRepairableBy(ItemStack repairMaterial) {
-        return this.delegate.isRepairableBy(repairMaterial);
+        return super.isRepairableBy(repairMaterial);
     }
 
     public boolean canRepair(ItemStack toBeRepaired) {
-        return this.delegate.canRepair(toBeRepaired);
+        return super.canRepair(toBeRepaired);
     }
 
     public ItemStack damage(int amount, LivingEntity livingEntity) {
-        return this.delegate.damage(amount, livingEntity);
+        return super.damage(amount, livingEntity);
     }
 
     public boolean isEmpty() {
-        return this.delegate.isEmpty();
+        return super.isEmpty();
     }
 
     public List<Component> computeTooltipLines(TooltipContext tooltipContext, Player player) {
-        return this.delegate.computeTooltipLines(tooltipContext, player);
+        return super.computeTooltipLines(tooltipContext, player);
     }
 
     public HoverEvent<HoverEvent.ShowItem> asHoverEvent() {
-        return this.delegate.asHoverEvent();
+        return super.asHoverEvent();
     }
 }

@@ -5,12 +5,10 @@ import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event.Result;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.inventory.ItemStack;
 
 import io.github.thebusybiscuit.slimefun4.api.events.PlayerRightClickEvent;
 import io.github.thebusybiscuit.slimefun4.api.events.SlimefunGuideOpenEvent;
@@ -18,7 +16,6 @@ import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuide;
 import io.github.thebusybiscuit.slimefun4.core.guide.SlimefunGuideMode;
 import io.github.thebusybiscuit.slimefun4.core.guide.options.SlimefunGuideSettings;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
-import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
 
 public class SlimefunGuideListener implements Listener {
 
@@ -46,24 +43,35 @@ public class SlimefunGuideListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void onInteract(PlayerRightClickEvent e) {
         Player p = e.getPlayer();
+        SlimefunGuideMode mode = SlimefunGuide.getGuideMode(e.getItem());
 
-        if (tryOpenGuide(p, e, SlimefunGuideMode.SURVIVAL_MODE) == Result.ALLOW) {
-            if (p.isSneaking()) {
-                SlimefunGuideSettings.openSettings(p, e.getItem());
-            } else {
-                openGuide(p, e, SlimefunGuideMode.SURVIVAL_MODE);
-            }
-        } else if (tryOpenGuide(p, e, SlimefunGuideMode.CHEAT_MODE) == Result.ALLOW) {
-            if (p.isSneaking()) {
-                SlimefunGuideSettings.openSettings(p, e.getItem());
-            } else {
-                /*
-                 * We rather just run the command here, all
-                 * necessary permission checks will be handled there.
-                 */
-                p.chat("/sf cheat");
-            }
+        if (mode == null) {
+            return;
         }
+
+        if (!Slimefun.getWorldSettingsService().isWorldEnabled(p.getWorld())) {
+            Slimefun.getLocalization().sendMessage(p, "messages.disabled-item", true);
+            e.cancel();
+            return;
+        }
+
+        if (p.isSneaking()) {
+            e.cancel();
+            SlimefunGuideSettings.openSettings(p, e.getItem());
+            return;
+        }
+
+        if (mode == SlimefunGuideMode.CHEAT_MODE) {
+            /*
+             * Permission checks are handled by the command itself.
+             * Cancel the book interaction so Minecraft does not use the item.
+             */
+            e.cancel();
+            p.chat("/sf cheat");
+            return;
+        }
+
+        openGuide(p, e, mode);
     }
 
     @ParametersAreNonnullByDefault
@@ -75,23 +83,6 @@ public class SlimefunGuideListener implements Listener {
             e.cancel();
             SlimefunGuide.openGuide(p, event.getGuideLayout());
         }
-    }
-
-    @Nonnull
-    @ParametersAreNonnullByDefault
-    private Result tryOpenGuide(Player p, PlayerRightClickEvent e, SlimefunGuideMode layout) {
-        ItemStack item = e.getItem();
-        if (SlimefunUtils.isItemSimilar(item, SlimefunGuide.getItem(layout), false, false)) {
-
-            if (!Slimefun.getWorldSettingsService().isWorldEnabled(p.getWorld())) {
-                Slimefun.getLocalization().sendMessage(p, "messages.disabled-item", true);
-                return Result.DENY;
-            }
-
-            return Result.ALLOW;
-        }
-
-        return Result.DEFAULT;
     }
 
 }

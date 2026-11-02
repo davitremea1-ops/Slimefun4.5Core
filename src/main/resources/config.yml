@@ -36,13 +36,13 @@ options:
   legacy-dust-washer: false
   legacy-ore-grinder: true
 
-  language: en
+  language: pt-BR
   enable-translations: true
 
   log-duplicate-block-entries: true
   burn-players-when-radioactive: true
   drop-excess-sf-give-items: false
-  
+
   backup-data: true
   drop-block-creative: true
 

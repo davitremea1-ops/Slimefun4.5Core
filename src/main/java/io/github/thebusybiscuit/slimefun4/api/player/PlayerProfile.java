@@ -405,6 +405,10 @@ public class PlayerProfile {
                     event.getProfile().markForDeletion();
                 }
 
+                // Publish the loaded state before invoking the callback. A callback may
+                // immediately call request()/get() for the same UUID; leaving it in
+                // "loading" until the callback returns creates a race and false negatives.
+                loading.remove(uuid);
                 callback.accept(event.getProfile());
             } finally {
                 // Make sure we only clear this after we either published the profile or failed the load.

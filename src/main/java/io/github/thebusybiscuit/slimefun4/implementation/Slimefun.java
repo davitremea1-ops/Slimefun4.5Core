@@ -7,7 +7,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -230,7 +229,9 @@ public class Slimefun extends JavaPlugin implements SlimefunAddon {
 
         // Check that we got loaded by MockBukkit rather than Bukkit's loader
         // TODO: This is very much a hack and we can hopefully move to a more native way in the future
-        if (getClassLoader().getClass().getPackageName().startsWith("be.seeseemelk.mockbukkit")) {
+        String loaderPackage = getClassLoader().getClass().getPackageName();
+        if (loaderPackage.startsWith("org.mockbukkit.mockbukkit")
+            || loaderPackage.startsWith("be.seeseemelk.mockbukkit")) {
             minecraftVersion = MinecraftVersion.UNIT_TEST;
         }
     }
@@ -523,22 +524,27 @@ public class Slimefun extends JavaPlugin implements SlimefunAddon {
     }
 
     private void runWorldBackupOnShutdown() {
-        CountDownLatch latch = new CountDownLatch(1);
+        // Bukkit cancels this plugin's scheduler tasks at the start of onDisable().
+        // Use a dedicated daemon thread because the scheduler must not be used once
+        // plugin shutdown has started.
+        Thread backupThread = new Thread(() -> {
+            worldBackupService.run();
+            getLogger().info("World backup worker finished during shutdown.");
+        }, "Slimefun-World-Backup");
+        backupThread.setDaemon(true);
+        backupThread.start();
 
         try {
-            Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
-                try {
-                    worldBackupService.run();
-                } finally {
-                    latch.countDown();
-                }
-            });
+            backupThread.join(TimeUnit.MINUTES.toMillis(10));
 
-            if (!latch.await(10L, TimeUnit.MINUTES)) {
+            if (backupThread.isAlive()) {
+                backupThread.interrupt();
                 getLogger().warning("World backup did not finish within 10 minutes during shutdown.");
             }
-        } catch (Exception x) {
-            getLogger().log(Level.WARNING, "Could not run world backup asynchronously during shutdown", x);
+        } catch (InterruptedException exception) {
+            backupThread.interrupt();
+            Thread.currentThread().interrupt();
+            getLogger().log(Level.WARNING, "Waiting for the world backup was interrupted during shutdown", exception);
         }
     }
 

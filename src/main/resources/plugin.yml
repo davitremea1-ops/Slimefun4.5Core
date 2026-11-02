@@ -1,17 +1,17 @@
-# Name and version
+# Nome e versão
 name: Slimefun
 version: ${project.version}
 
-# Project metadata
-author: The Slimefun 4 Community
+# Metadados do projeto
+author: Comunidade Slimefun 4
 website: https://github.com/Slimefun
-description: Slimefun basically turns your entire Server into a FTB modpack without installing a single mod
+description: O Slimefun transforma seu servidor em uma experiência semelhante a um modpack, sem exigir que os jogadores instalem mods
 
-# Technical settings
+# Configurações técnicas
 main: io.github.thebusybiscuit.slimefun4.implementation.Slimefun
 api-version: '1.21'
 
-# (Soft) dependencies of Slimefun, we hook into these plugins.
+# Dependências opcionais do Slimefun.
 softdepend:
 - PlaceholderAPI
 - WorldEdit
@@ -20,81 +20,81 @@ softdepend:
 - ItemsAdder
 - Orebfuscator
 
-# Our commands
+# Comandos
 commands:
   slimefun:
     aliases: sf
-    description: Slimefun base command
-    usage: The Slimefun version you have installed does not seem to be compatible with your server setup. Check your console for more detailed info.
+    description: Comando principal do Slimefun
+    usage: A versão do Slimefun instalada não parece ser compatível com a configuração do servidor. Consulte o console para obter mais detalhes.
   addon:
-    description: Managed Slimefun addon administration
-    usage: /addon <list|download|update|remove|enable|disable> [name]
+    description: Administração de add-ons gerenciados pelo Slimefun
+    usage: /addon <list|download|update|remove|enable|disable> [nome]
 
-# Default permissions
+# Permissões padrão
 permissions:
   slimefun.command.guide:
-    description: Allows you to obtain the Slimefun guide book
+    description: Permite obter o livro-guia do Slimefun
     default: true
   slimefun.command.search:
-    description: Allows you to do /sf search
+    description: Permite usar o comando /sf search
     default: true
   slimefun.command.open_guide:
-    description: Allows you to open the SF guide without the book
+    description: Permite abrir o guia do Slimefun sem ter o livro
     default: op
   slimefun.cheat.items:
-    description: Allows you to cheat Items
+    description: Permite conceder itens do Slimefun por comando
     default: op
   slimefun.cheat.researches:
-    description: Allows you to cheat Researches
+    description: Permite desbloquear pesquisas por comando
     default: op
   slimefun.stats.others:
-    description: Allows you to see the Stats from other Players
+    description: Permite consultar as estatísticas de outros jogadores
     default: op
   slimefun.android.upload-script:
-    description: Allows you to upload an Android Script
+    description: Permite enviar scripts para Androids
     default: op
   slimefun.command.timings:
-    description: Allows you to do /sf timings
+    description: Permite usar o comando /sf timings
     default: op
   slimefun.command.teleporter:
-    description: Allows you to do /sf teleporter
+    description: Permite usar o comando /sf teleporter
     default: op
   slimefun.command.versions:
-    description: Allows you to do /sf versions
+    description: Permite usar o comando /sf versions
     default: op
   slimefun.command.update:
-    description: Allows you to do /sf update
+    description: Permite usar o comando /sf update
     default: op
   slimefun.command.backpack:
-    description: Allows you to do /sf backpack
+    description: Permite usar o comando /sf backpack
     default: op
   slimefun.command.charge:
-    description: Allows you to do /sf charge
+    description: Permite usar o comando /sf charge
     default: op
   slimefun.command.debug:
-    description: Allows you to do /sf debug
+    description: Permite usar o comando /sf debug
     default: op
   slimefun.android.bypass:
-    description: Allows you to edit other Players Androids
+    description: Permite editar os Androids de outros jogadores
     default: op
   slimefun.cargo.bypass:
-    description: Allows you to edit other Players Cargo Blocks
+    description: Permite editar os blocos de transporte de itens de outros jogadores
     default: op
   slimefun.inventory.bypass:
-    description: Allows you to open all Slimefun Machines
+    description: Permite abrir todas as máquinas do Slimefun
     default: op
   slimefun.gps.bypass:
-    description: Allows you to open all GPS inventories
+    description: Permite abrir todos os inventários de GPS
     default: op
   slimefun.debugging:
-    description: Allows you to use the debugging tool from Slimefun
+    description: Permite usar a ferramenta de depuração do Slimefun
     default: op
   addon.admin:
-    description: Allows full managed addon administration
+    description: Permite administrar completamente os add-ons gerenciados
     default: op
   addon.update:
-    description: Allows managed addon download and update actions
+    description: Permite baixar e atualizar add-ons gerenciados
     default: op
   addon.manage:
-    description: Allows managed addon enable, disable and remove actions
+    description: Permite ativar, desativar e remover add-ons gerenciados
     default: op

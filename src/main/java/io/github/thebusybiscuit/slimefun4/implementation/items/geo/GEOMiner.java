@@ -8,6 +8,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import org.apache.commons.lang.Validate;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -17,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 import io.github.thebusybiscuit.slimefun4.libraries.bridge.SF4Items;
 import io.github.thebusybiscuit.slimefun4.api.SlimefunAddon;
 import io.github.thebusybiscuit.slimefun4.api.geo.GEOResource;
+import io.github.thebusybiscuit.slimefun4.api.events.GEOMiningStartEvent;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
 import io.github.thebusybiscuit.slimefun4.api.items.ItemState;
 import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
@@ -190,6 +192,7 @@ public class GEOMiner extends SlimefunItem implements RecipeDisplayItem, EnergyN
 
             @Override
             public void onPlayerPlace(BlockPlaceEvent e) {
+                BlockStorage.addBlockInfo(e.getBlock(), "owner", e.getPlayer().getUniqueId().toString(), true);
                 updateHologram(e.getBlock(), "&7Idling...");
             }
         };
@@ -321,6 +324,13 @@ public class GEOMiner extends SlimefunItem implements RecipeDisplayItem, EnergyN
                 int supplies = optional.getAsInt();
                 if (supplies > 0) {
                     if (!inv.fits(resource.getItem(), OUTPUT_SLOTS)) {
+                        return;
+                    }
+
+                    GEOMiningStartEvent miningEvent = new GEOMiningStartEvent(b, resource);
+                    Bukkit.getPluginManager().callEvent(miningEvent);
+                    if (miningEvent.isCancelled()) {
+                        updateHologram(b, "&cTechnology research required!");
                         return;
                     }
 

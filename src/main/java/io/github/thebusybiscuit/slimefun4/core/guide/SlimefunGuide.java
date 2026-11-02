@@ -15,8 +15,8 @@ import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
 import io.github.thebusybiscuit.slimefun4.api.player.PlayerProfile;
 import io.github.thebusybiscuit.slimefun4.implementation.Slimefun;
 import io.github.thebusybiscuit.slimefun4.implementation.guide.SurvivalSlimefunGuide;
+import io.github.thebusybiscuit.slimefun4.libraries.bridge.SF4DataAPI;
 import io.github.thebusybiscuit.slimefun4.utils.SlimefunUtils;
-import io.github.thebusybiscuit.slimefun4.utils.itemstack.SlimefunGuideItem;
 
 /**
  * This is a static utility class that provides convenient access to the methods
@@ -42,15 +42,15 @@ public final class SlimefunGuide {
     }
 
     public static void openGuide(@Nonnull Player p, @Nullable ItemStack guide) {
-        if (getItem(SlimefunGuideMode.CHEAT_MODE).equals(guide)) {
-            openGuide(p, SlimefunGuideMode.CHEAT_MODE);
-        } else {
-            /*
-             * When using /sf cheat or /sf open_guide the ItemStack is null anyway,
-             * so we don't even need to check here at this point.
-             */
-            openGuide(p, SlimefunGuideMode.SURVIVAL_MODE);
-        }
+        SlimefunGuideMode mode = getGuideMode(guide);
+
+        /*
+         * Commands such as /sf cheat and /sf open_guide pass null. Preserve
+         * their historical behavior and default to the survival guide.
+         */
+        openGuide(p, mode == SlimefunGuideMode.CHEAT_MODE
+                ? SlimefunGuideMode.CHEAT_MODE
+                : SlimefunGuideMode.SURVIVAL_MODE);
     }
 
     public static void openGuide(@Nonnull Player p, @Nonnull SlimefunGuideMode mode) {
@@ -111,13 +111,43 @@ public final class SlimefunGuide {
      * @return Whether this {@link ItemStack} represents a {@link SlimefunGuide}
      */
     public static boolean isGuideItem(@Nullable ItemStack item) {
-        if (item == null || item.getType() != Material.ENCHANTED_BOOK) {
-            return false;
-        } else if (item instanceof SlimefunGuideItem) {
-            return true;
-        } else {
-            return SlimefunUtils.isItemSimilar(item, getItem(SlimefunGuideMode.SURVIVAL_MODE), true) || SlimefunUtils.isItemSimilar(item, getItem(SlimefunGuideMode.CHEAT_MODE), true);
+        return getGuideMode(item) != null;
+    }
+
+    /**
+     * Identifies a Slimefun guide using its persistent mode marker.
+     *
+     * <p>The marker survives display-name, lore and texture changes, unlike a
+     * visual ItemStack comparison. Older guide books without the marker remain
+     * supported through the legacy metadata comparison.</p>
+     *
+     * @param item item to inspect
+     * @return the guide mode, or null when the item is not a recognized guide
+     */
+    @Nullable
+    public static SlimefunGuideMode getGuideMode(@Nullable ItemStack item) {
+        if (item == null || item.getType() != Material.ENCHANTED_BOOK || !item.hasItemMeta()) {
+            return null;
         }
+
+        String storedMode = SF4DataAPI.getString(item.getItemMeta(), Slimefun.getRegistry().getGuideDataKey());
+        if (storedMode != null) {
+            try {
+                return SlimefunGuideMode.valueOf(storedMode);
+            } catch (IllegalArgumentException ignored) {
+                // An invalid marker must not grant access to either guide mode.
+                return null;
+            }
+        }
+
+        // Backwards compatibility for guide books created before the PDC marker.
+        if (SlimefunUtils.isItemSimilar(item, getItem(SlimefunGuideMode.SURVIVAL_MODE), true)) {
+            return SlimefunGuideMode.SURVIVAL_MODE;
+        }
+        if (SlimefunUtils.isItemSimilar(item, getItem(SlimefunGuideMode.CHEAT_MODE), true)) {
+            return SlimefunGuideMode.CHEAT_MODE;
+        }
+        return null;
     }
 
     /**

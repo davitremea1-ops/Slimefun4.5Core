@@ -5,6 +5,7 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.MenuType;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -24,12 +25,16 @@ import javax.annotation.Nullable;
  */
 public class InventoryViewWrapper extends InventoryViewMock {
 
+    private final InventoryView backingView;
+
     private InventoryViewWrapper(HumanEntity player,
                                  String name,
                                  Inventory top,
                                  Inventory bottom,
-                                 InventoryType type) {
-        super(player, name, top, bottom, type);
+                                 InventoryType type,
+                                 @Nonnull InventoryView backingView) {
+        super(player, top, bottom, type);
+        this.backingView = backingView;
     }
 
     @Nonnull
@@ -39,7 +44,23 @@ public class InventoryViewWrapper extends InventoryViewMock {
         Inventory top = inventoryView.getTopInventory();
         Inventory bottom = inventoryView.getBottomInventory();
         InventoryType inventoryType = inventoryView.getType();
-        return new InventoryViewWrapper(player, name, top, bottom, inventoryType);
+        return new InventoryViewWrapper(player, name, top, bottom, inventoryType, inventoryView);
+    }
+
+    @Override
+    @Nullable
+    public MenuType getMenuType() {
+        return backingView.getMenuType();
+    }
+
+    @Override
+    public void open() {
+        backingView.open();
+    }
+
+    @Override
+    public void close() {
+        backingView.close();
     }
 
     @Override
