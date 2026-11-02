@@ -230,7 +230,9 @@ public class Slimefun extends JavaPlugin implements SlimefunAddon {
 
         // Check that we got loaded by MockBukkit rather than Bukkit's loader
         // TODO: This is very much a hack and we can hopefully move to a more native way in the future
-        if (getClassLoader().getClass().getPackageName().startsWith("be.seeseemelk.mockbukkit")) {
+        String loaderPackage = getClassLoader().getClass().getPackageName();
+        if (loaderPackage.startsWith("org.mockbukkit.mockbukkit")
+            || loaderPackage.startsWith("be.seeseemelk.mockbukkit")) {
             minecraftVersion = MinecraftVersion.UNIT_TEST;
         }
     }
